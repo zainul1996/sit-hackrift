@@ -56,7 +56,7 @@ var application = {
     "id": 14,
     "startAge": 18,
     "endAge": 25,
-    "activity": "badminton",
+    "activity": ["badminton", "fb"],
     "gender": ["M", "F", "O"],
     "locations": ["ss", "ps", "there"],
     "startDate": "14-10-2022",
