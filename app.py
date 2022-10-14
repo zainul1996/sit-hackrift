@@ -94,32 +94,43 @@ def create_matchmake():
         "locations": {
             "$in": content["locations"]
         },
-        "startDate": {
-            "$lte": content["endDate"],
-        },
-        "endDate": {
-            "$gte": content["startDate"],
-        },
-        "startDuration": {
-            "$lte": content["endDuration"],
-        },
-        "endDuration": {
-            "$gte": content["startDuration"],
-        },
+        "$or": [{
+            "startDate": {
+                "$lte": content["endDate"],
+            },
+            "endDate": {
+                "$gte": content["startDate"],
+            }
+        }],
+        "$or": [{
+            "startDuration": {
+                "$lte": content["endDuration"],
+            },
+            "endDuration": {
+                "$gte": content["startDuration"],
+            },
+        }],
         "usergender": {
             "$in": content["gender"]
         },
         "userage": {
             "$gte": content["startAge"],
             "$lte": content["endAge"]
-        }
+        },
+		"userMMR": {
+			"$lte": content["userMMR"] + 50,
+			"$gte": content["userMMR"] - 50
+		}
     })
 
     if res is None:
         x = db['matchmake'].insert_one(content)
 
+	## TODO return matched
+
     print(res)
     return("Success")
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080)
