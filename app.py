@@ -59,6 +59,14 @@ def create_user():
 	x = db['Users'].insert_one(userObj)
 	return("Success")
 
+@app.route("/matchmake", methods= ['GET'])
+def get_matchmake():
+	id = request.args.get('id')
+	if not id:
+		return("Failed, no id")
+	user = db['matchmake'].find_one({'_id': ObjectId(id)})
+	return(json.loads(json.dumps(user,default=str)))
+
 @app.route('/creatematchmake',methods = ['POST'])
 def create_matchmake():
 	content = request.json
