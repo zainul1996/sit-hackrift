@@ -63,10 +63,10 @@ var application = {
     "endDate": "15-10-2022",
     "startDuration": 7,
     "endDuration": 9,
-    "user": "hehe",
-    "MMR": 1554,
-    "age": 18,
-    "gender": "M",
+    "userName": "hehe",
+    "userMMR": 1554,
+    "userage": 18,
+    "usergender": "O",
     "match": "pending",
     "rejected": [20],
     "attendance": 1
@@ -76,7 +76,7 @@ const btn = document.querySelector('#btn');
 
 btn.addEventListener('click', (e) => {
     console.log("hello");
-    fetch('/test', {
+    fetch('/creatematchmake', {
         headers: {
             'Content-Type': 'application/json'
         },
