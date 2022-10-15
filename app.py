@@ -50,6 +50,7 @@ def get_user():
     id = request.args.get('id')
     try:
         user = db['user'].find_one({'_id': ObjectId(id)})
+        print(user)
         return(json.loads(json.dumps(user, default=str)))
     except bson.errors.InvalidId:
         return("Failed, non existing id")
