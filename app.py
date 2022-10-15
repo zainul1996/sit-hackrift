@@ -12,11 +12,16 @@ password = os.getenv('PASSWORD')
 client = pymongo.MongoClient("mongodb+srv://rushhour:"+password+"@cluster0.ksdhfcl.mongodb.net/?retryWrites=true&w=majority")
 db = client.test
 collection = db.test_collection
+print(collection)
 
 @app.route("/")
 @app.route("/index")
 def index():
 	return render_template("index.html")
+
+@app.route("/home")
+def home():
+	return render_template("home.html")
 
 # routes for pwa
 @app.route("/manifest.webmanifest")
