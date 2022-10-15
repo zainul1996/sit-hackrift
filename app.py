@@ -21,16 +21,20 @@ db = client.hackrift
 @app.route("/")
 @app.route("/index")
 def index():
-    return render_template("index.html")
+    return render_template("loginPage.html")
 
 
 @app.route("/home")
 def home():
-    return render_template("home.html")
+    return render_template("matchmakingPage.html")
 
 @app.route("/lobby")
 def lobby():
-	return render_template("lobby.html")
+	return render_template("lobbyPage.html")
+
+@app.route("/create")
+def create():
+	return render_template("createPage.html")
 
 # routes for pwa
 
@@ -50,6 +54,7 @@ def get_user():
     id = request.args.get('id')
     try:
         user = db['user'].find_one({'_id': ObjectId(id)})
+        print(user)
         return(json.loads(json.dumps(user, default=str)))
     except bson.errors.InvalidId:
         return("Failed, non existing id")
