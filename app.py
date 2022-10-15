@@ -6,6 +6,7 @@ import bson
 import pymongo
 import os
 import json
+import datetime
 
 app = Flask(__name__)
 
@@ -34,40 +35,50 @@ def manifest():
 def service_worker():
     return send_from_directory("static", "sw.js")
 
-@app.route("/user", methods= ['GET'])
+
+@app.route("/user", methods=['GET'])
 def get_user():
-	id = request.args.get('id')
-	try:
-		user = db['user'].find_one({'_id': ObjectId(id)})
-		return(json.loads(json.dumps(user,default=str)))
-	except bson.errors.InvalidId:
-		return("Failed, non existing id")
+    id = request.args.get('id')
+    try:
+        user = db['user'].find_one({'_id': ObjectId(id)})
+        return(json.loads(json.dumps(user, default=str)))
+    except bson.errors.InvalidId:
+        return("Failed, non existing id")
+
 
 @app.route('/createUser', methods=['POST'])
 def create_user():
-	content = request.json
-	if not content:
-		return ("Failed, Not Json")
-	if not all(k in content for k in ("name","age","gender","mmr","blocked")):
-		return ("Failed, No proper keys")
+    content = request.json
+    if not content:
+        return ("Failed, Not Json")
+    if not all(k in content for k in ("name", "age", "gender", "mmr", "blocked")):
+        return ("Failed, No proper keys")
 
-	x = db['user'].insert_one(content)
-	return("Success")
+    x = db['user'].insert_one(content)
+    return("Success")
+
 
 @app.route("/matchmake", methods=['GET'])
 def get_matchmake():
-	id = request.args.get('id')
-	if not id:
-		return("Failed, no id")
-	try:
-		matchmake = db['matchmake'].find_one({'_id': ObjectId(id)})
-		return(json.loads(json.dumps(matchmake,default=str)))
-	except bson.errors.InvalidId:
-		return("Failed, non existing id")
+    id = request.args.get('id')
+    if not id:
+        return("Failed, no id")
+    try:
+        matchmake = db['matchmake'].find_one({'_id': ObjectId(id)})
+        return(json.loads(json.dumps(matchmake, default=str)))
+    except bson.errors.InvalidId:
+        return("Failed, non existing id")
+
 
 @app.route('/creatematchmake', methods=['POST'])
 def create_matchmake():
     content = request.json
+
+    content["startDate"] = datetime.datetime.strptime(
+        content["startDate"], "%Y-%m-%dT%H:%M:%S.000Z")
+    content["endDate"] = datetime.datetime.strptime(
+        content["endDate"], "%Y-%m-%dT%H:%M:%S.000Z")
+
     if not content:
         return ("Failed, Not Json")
 
@@ -109,76 +120,124 @@ def create_matchmake():
             "$gte": content["startAge"],
             "$lte": content["endAge"]
         },
-		"userMMR": {
-			"$lte": content["userMMR"] + 50,
-			"$gte": content["userMMR"] - 50
-		}
+        "userMMR": {
+            "$lte": content["userMMR"] + 50,
+            "$gte": content["userMMR"] - 50
+        }
     })
 
     if res is None:
         x = db['matchmake'].insert_one(content)
+        return(json.loads(json.dumps({"status": 1}, default=str)))
 
-	## TODO return matched
+    else:
+        content["match"] = res["_id"]
+        _id = db['matchmake'].insert_one(content)
+        col.update_one(
+            {"_id": res["_id"]},
+            {"$set": {"match": _id.inserted_id}}
+        )
 
-    print(res)
+        users = db.get_collection("user")
+        usr = users.find_one({
+            "name": res["userName"]
+        })
+
+        return(json.loads(json.dumps(usr, default=str)))
+
+
+@app.route("/checkmatchmake", methods=['POST'])
+def check_matchmake():
+    name = request.json["userName"]
+    print(name)
+    if not name:
+        return(json.loads(json.dumps({"status": 1, "err": "Failed, no name"}, default=str)))
+
+    try:
+        matchmake = db['matchmake'].find_one({
+            'userName': name,
+            'match': {"$ne": 0}
+        })
+
+        if matchmake is None:
+            return("No request")
+        else:
+            mm = db['matchmake'].find_one({
+                "_id": matchmake["match"]
+            })
+
+            users = db.get_collection("user")
+            usr = users.find_one({
+                "name": mm["userName"]
+            })
+            return (json.loads(json.dumps(usr, default=str)))
+
+    except bson.errors.InvalidId:
+        return("Failed, non existing id")
+
+
+@app.route("/room", methods=['GET'])
+def get_room():
+    id = request.args.get('id')
+    if not id:
+        return("Failed, no id")
+    try:
+        user = db['room'].find_one({'_id': ObjectId(id)})
+        return(json.loads(json.dumps(user, default=str)))
+    except bson.errors.InvalidId:
+        return("Failed, non existing id")
+
+
+@app.route('/createroom', methods=['POST'])
+def create_room():
+    content = request.json
+    if not content:
+        return ("Failed, Not Json")
+
+    try:
+        user = db['user'].find_one({'_id': ObjectId(content['userID'])})
+    except bson.errors.InvalidId:
+        return("Failed, non existing id")
+
+    x = db['room'].insert_one(
+        {"filter": content['filter'], "creator": user, "joined": []})
     return("Success")
 
-@app.route("/room", methods= ['GET'])
-def get_room():
-	id = request.args.get('id')
-	if not id:
-		return("Failed, no id")
-	try:
-		user = db['room'].find_one({'_id': ObjectId(id)})
-		return(json.loads(json.dumps(user,default=str)))
-	except bson.errors.InvalidId:
-		return("Failed, non existing id")
 
-@app.route('/createroom',methods = ['POST'])
-def create_room():
-	content = request.json
-	if not content:
-		return ("Failed, Not Json")
-
-	try:
-		user = db['user'].find_one({'_id': ObjectId(content['userID'])})
-	except bson.errors.InvalidId:
-		return("Failed, non existing id")
-
-	x = db['room'].insert_one({"filter":content['filter'],"creator":user,"joined":[]})
-	return("Success")
-
-@app.route('/joinroom',methods = ['POST'])
+@app.route('/joinroom', methods=['POST'])
 def join_room():
-	content = request.json
-	if not content:
-		return ("Failed, Not Json")
+    content = request.json
+    if not content:
+        return ("Failed, Not Json")
 
-	# check if room exist (Could be because full or confirmed)
-	try:
-		room = db['room'].find_one({'_id': ObjectId(content['roomID'])})
-		slots = room['filter']['roomSize'] - 1 
-		slots -= len(room['joined'])
-		if not slots > 0:
-			return("room is full")
-		else:
-			if str(content['userID']) == str(room['creator']['_id']):
-				return("Failed, cant join your own room")
-			if len(room['joined']) != 0:
-				print(content['userID'])
-				for x in room['joined']:
-					print(x['_id'])
-					if str(x['_id']) == content['userID']:
-						return("Failed, user already joined room")
-			try:
-				user = db['user'].find_one({'_id': ObjectId(content['userID'])})
-				room['joined'].append(user)
-				db['room'].update_one({'_id':ObjectId(content['roomID'])}, {"$set": room}, upsert=False)
-				return(user['name']+" joined "+room['creator']['name']+"'s room")
-			except bson.errors.InvalidId:
-				return("Failed, user not found")
-	except bson.errors.InvalidId:
-		return("Failed, room not found")
+    # check if room exist (Could be because full or confirmed)
+    try:
+        room = db['room'].find_one({'_id': ObjectId(content['roomID'])})
+        slots = room['filter']['roomSize'] - 1
+        slots -= len(room['joined'])
+        if not slots > 0:
+            return("room is full")
+        else:
+            if str(content['userID']) == str(room['creator']['_id']):
+                return("Failed, cant join your own room")
+            if len(room['joined']) != 0:
+                print(content['userID'])
+                for x in room['joined']:
+                    print(x['_id'])
+                    if str(x['_id']) == content['userID']:
+                        return("Failed, user already joined room")
+            try:
+                user = db['user'].find_one(
+                    {'_id': ObjectId(content['userID'])})
+                room['joined'].append(user)
+                db['room'].update_one({'_id': ObjectId(content['roomID'])}, {
+                                      "$set": room}, upsert=False)
+                return(user['name']+" joined "+room['creator']['name']+"'s room")
+            except bson.errors.InvalidId:
+                return("Failed, user not found")
+    except bson.errors.InvalidId:
+        return("Failed, room not found")
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080)

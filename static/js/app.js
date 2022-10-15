@@ -11,7 +11,6 @@
                 });
             navigator.serviceWorker.ready.then(function (registration) {
                 console.log('Service Worker Ready');
-                console.log('Service Worker Ready');
             });
         });
     }
@@ -53,21 +52,21 @@ var applicant = {
 }
 
 var application = {
-    "id": 14,
+    "id": 15,
     "startAge": 18,
     "endAge": 25,
     "activity": ["badminton", "fb"],
     "gender": ["M", "F", "O"],
     "locations": ["ss", "ps", "there"],
-    "startDate": "2022-10-12",
-    "endDate": "2022-10-13",
+    "startDate": new Date(2022, 10, 12),
+    "endDate": new Date(2022, 10, 13),
     "startDuration": 7,
     "endDuration": 9,
-    "userName": "hehe",
+    "userName": "kokfong",
     "userMMR": 2000,
     "userage": 18,
     "usergender": "O",
-    "match": "pending",
+    "match": 0,
     "rejected": [20],
     "attendance": 1
 }
@@ -76,7 +75,7 @@ const btn = document.querySelector('#btn');
 
 btn.addEventListener('click', (e) => {
     console.log("hello");
-    fetch('/creatematchmake', {
+    fetch('/checkmatchmake', {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -86,3 +85,16 @@ btn.addEventListener('click', (e) => {
         .then((response) => response.json())
         .then((data) => console.log(data));
 });
+
+// btn.addEventListener('click', (e) => {
+//     console.log("hello");
+//     fetch('/checkmatchmake', {
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         method: "POST",
+//         body: JSON.stringify(application)
+//     })
+//         .then((response) => response.json())
+//         .then((data) => console.log(data));
+// });
