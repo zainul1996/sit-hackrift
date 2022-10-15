@@ -6,7 +6,11 @@ module.exports = {
     './node_modules/flowbite/**/*.js'
   ],
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateColumns: {
+        'my-columns': 'auto 0fr'
+      }
+    }
   },
   plugins: [
     require('flowbite/plugin')

@@ -23,6 +23,10 @@ db = client.hackrift
 def index():
     return render_template("index.html")
 
+@app.route("/home")
+def home():
+	return render_template("home.html")
+
 # routes for pwa
 
 
@@ -199,45 +203,62 @@ def create_room():
     except bson.errors.InvalidId:
         return("Failed, non existing id")
 
-    x = db['room'].insert_one(
-        {"filter": content['filter'], "creator": user, "joined": []})
+    x = db['room'].insert_one({"filter":content['filter'],"creator":user,"joined":[],"roomStatus":content['roomStatus']})
     return("Success")
-
 
 @app.route('/joinroom', methods=['POST'])
 def join_room():
-    content = request.json
-    if not content:
-        return ("Failed, Not Json")
+	content = request.json
+	if not content:
+		return ("Failed, Not Json")
 
-    # check if room exist (Could be because full or confirmed)
-    try:
-        room = db['room'].find_one({'_id': ObjectId(content['roomID'])})
-        slots = room['filter']['roomSize'] - 1
-        slots -= len(room['joined'])
-        if not slots > 0:
-            return("room is full")
-        else:
-            if str(content['userID']) == str(room['creator']['_id']):
-                return("Failed, cant join your own room")
-            if len(room['joined']) != 0:
-                print(content['userID'])
-                for x in room['joined']:
-                    print(x['_id'])
-                    if str(x['_id']) == content['userID']:
-                        return("Failed, user already joined room")
-            try:
-                user = db['user'].find_one(
-                    {'_id': ObjectId(content['userID'])})
-                room['joined'].append(user)
-                db['room'].update_one({'_id': ObjectId(content['roomID'])}, {
-                                      "$set": room}, upsert=False)
-                return(user['name']+" joined "+room['creator']['name']+"'s room")
-            except bson.errors.InvalidId:
-                return("Failed, user not found")
-    except bson.errors.InvalidId:
-        return("Failed, room not found")
+	# check if room exist (Could be because full or confirmed)
+	try:
+		room = db['room'].find_one({'_id': ObjectId(content['roomID'])})
+		slots = room['filter']['roomSize'] - 1 
+		slots -= len(room['joined'])
+		if not slots > 0:
+			return("room is full")
+		else:
+			if str(content['userID']) == str(room['creator']['_id']):
+				return("Failed, cant join your own room")
+			if len(room['joined']) != 0:
+				print(content['userID'])
+				for x in room['joined']:
+					print(x['_id'])
+					if str(x['_id']) == content['userID']:
+						return("Failed, user already joined room")
+			try:
+				user = db['user'].find_one({'_id': ObjectId(content['userID'])})
+				room['joined'].append(user)
+				if slots == 1:
+					room['roomStatus'] = 0
+				db['room'].update_one({'_id':ObjectId(content['roomID'])}, {"$set": room}, upsert=False)
+				return(user['name']+" joined "+room['creator']['name']+"'s room")
+			except bson.errors.InvalidId:
+				return("Failed, user not found")
+	except bson.errors.InvalidId:
+		return("Failed, room not found")
 
+@app.route('/createFacilities',methods = ['POST'])
+def create_facilities():
+	content = request.json
+	if not content:
+		return ("Failed, Not Json")
+
+	x = db['facilities'].insert_one(content)
+	return("Success")
+
+@app.route('/getAllFacilities',methods = ['GET'])
+def get_all_facilities():
+	res = db['room'].find(
+		{
+			"roomStatus": 1
+		}
+	)
+
+	result = {"rooms":list(res)}
+	return(json.loads(json.dumps(result,default=str)))
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080)
