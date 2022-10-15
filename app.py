@@ -173,6 +173,8 @@ def join_room():
 			try:
 				user = db['user'].find_one({'_id': ObjectId(content['userID'])})
 				room['joined'].append(user)
+				if slots == 1:
+					room['roomStatus'] = 0
 				db['room'].update_one({'_id':ObjectId(content['roomID'])}, {"$set": room}, upsert=False)
 				return(user['name']+" joined "+room['creator']['name']+"'s room")
 			except bson.errors.InvalidId:
@@ -188,6 +190,17 @@ def create_facilities():
 
 	x = db['facilities'].insert_one(content)
 	return("Success")
+
+@app.route('/getAllFacilities',methods = ['GET'])
+def get_all_facilities():
+	res = db['room'].find(
+		{
+			"roomStatus": 1
+		}
+	)
+
+	result = {"rooms":list(res)}
+	return(json.loads(json.dumps(result,default=str)))
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080)
