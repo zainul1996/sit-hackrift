@@ -36,6 +36,10 @@ def lobby():
 def create():
 	return render_template("createPage.html")
 
+@app.route("/profile")
+def profile():
+	return render_template("profile.html")
+
 # routes for pwa
 
 
@@ -54,6 +58,7 @@ def get_user():
     id = request.args.get('id')
     try:
         user = db['user'].find_one({'_id': ObjectId(id)})
+        print(user)
         return(json.loads(json.dumps(user, default=str)))
     except bson.errors.InvalidId:
         return("Failed, non existing id")
@@ -237,7 +242,8 @@ def create_room():
         user = db['user'].find_one({'_id': ObjectId(content['userID'])})
         content['filter']['startDate'] = datetime.datetime.strptime(content["filter"]["startDate"], "%Y-%m-%dT%H:%M:%S.000Z")
         content['filter']['endDate'] = datetime.datetime.strptime(content["filter"]["endDate"], "%Y-%m-%dT%H:%M:%S.000Z")
-        x = db['room'].insert_one({"filter":content['filter'],"creator":user,"joined":[],"roomStatus":content['roomStatus']})
+        avgMmr = user['mmr']
+        x = db['room'].insert_one({"filter":content['filter'],"creator":user,"joined":[],"roomStatus":content['roomStatus'],"averageMmr":avgMmr})
         return("Success")
     except bson.errors.InvalidId:
         return("Failed, non existing id")
@@ -253,6 +259,7 @@ def join_room():
         room = db['room'].find_one({'_id': ObjectId(content['roomID'])})
         slots = room['filter']['roomSize'] - 1
         slots -= len(room['joined'])
+        currentRoomSize = len(room['joined'])+1
         if not slots > 0:
             return("room is full")
         else:
@@ -267,6 +274,7 @@ def join_room():
             try:
                 user = db['user'].find_one(
                     {'_id': ObjectId(content['userID'])})
+                room['averageMmr'] = (room['averageMmr']+user['mmr'])/(currentRoomSize+1)
                 room['joined'].append(user)
                 if slots == 1:
                     room['roomStatus'] = 0

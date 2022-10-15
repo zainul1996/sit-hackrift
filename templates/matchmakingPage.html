@@ -64,6 +64,9 @@
                     <div class="flex-1 min-w-0">
                         <h1 class="mt-2 text-2xl font-bold leading-7 text-white sm:text-3xl sm:truncate">Zainul Ariffin
                         </h1>
+                        <h1 id="MMR" class="mt-2 text-2xl font-bold leading-7 text-white sm:text-3xl sm:truncate">
+                            Rating: 1883
+                        </h1>
                         <div
                             class="grid grid-cols-[repeat(2,_0fr)] sm:grid-cols-[repeat(4,_0fr)] md:grid-cols-[repeat(6,_0fr)] lg:grid-cols-[repeat(8,_0fr)] mt-1 grid-flow-dense sm:mt-0 sm:space-x-12 pt-3">
                             <span
@@ -170,7 +173,7 @@
             <div class="grid content-center px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="h-full max-w-xs mx-auto text-center align-middle">
                     <span class="inline-block w-64 h-64 overflow-hidden bg-gray-100 rounded-full ">
-                        <img class="object-cover w-full h-full"
+                        <img id="matchmake-btn" style="cursor: pointer;" class="object-cover w-full h-full"
                             src="https://www.nicepng.com/png/detail/816-8167151_vector-illustration-of-sports-balls-with-football-all.png"
                             alt="Profile Picture">
                     </span>
@@ -185,8 +188,61 @@
 </div>
 <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 <script>
-    // new QRCode(document.getElementById("qrcode"), "https://webisora.com");
 
+    // On log in
+    var profile;
+
+    const getInfo = async () => {
+        const response = await fetch('/user?' + new URLSearchParams({
+            id: "6349c0439218286ad81f6575",
+        }), {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: "GET"
+        })
+        profile = await response.json();
+        console.log(profile)
+        document.getElementById('MMR').innerHTML = "Rating: " + profile.mmr;
+    }
+
+    getInfo();
+
+    // Matchmake
+    var dummy_application = {
+        "id": 15,
+        "startAge": 18,
+        "endAge": 25,
+        "activity": ["badminton", "fb"],
+        "gender": ["M", "F", "O"],
+        "locations": ["ss", "ps", "there"],
+        "startDate": new Date(2022, 10, 12),
+        "endDate": new Date(2022, 10, 13),
+        "startDuration": 7,
+        "endDuration": 9,
+        "userName": "kokfong",
+        "userMMR": 2000,
+        "userage": 18,
+        "usergender": "O",
+        "match": 0,
+        "rejected": [20],
+        "attendance": 1
+    }
+
+    document.getElementById("matchmake-btn").onclick = function () { matchmake() };
+    function matchmake() {
+        fetch('/creatematchmake', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify(dummy_application)
+        })
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+    }
+
+    // QR Code
     var qrcode = new QRCode(document.getElementById("qrcode"), {
         text: "taken",
         width: 128,
