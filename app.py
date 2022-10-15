@@ -357,4 +357,4 @@ def get_all_location():
 
 if __name__ == '__main__':
 	# ZAINUL: 172.20.10.3
-    app.run(debug=True, port=8080)
+    app.run(debug=True, port=8080, host='172.20.10.3')

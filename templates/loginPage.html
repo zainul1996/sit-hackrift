@@ -30,7 +30,7 @@
                                 setting, we enable you to do it all right from our platform.</p>
                         </div>
                     </div>
-                    <div class="p-12 lg:p-0 sm:mt-24 lg:mt-0 lg:col-span-6">
+                    <div class="pt-8 pl-24 pr-24 lg:p-0 sm:mt-24 lg:mt-0 lg:col-span-6" id="login-scan">
                         <div
                             class="bg-white rounded-2xl sm:max-w-md sm:w-full sm:mx-auto sm:rounded-lg sm:overflow-hidden">
                             <div class="px-4 py-8 sm:px-10">
@@ -74,4 +74,18 @@
         </main>
     </div>
 </div>
+<script>
+    // if running in standalone mode
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+        // hide the button
+        login_scan = document.getElementById("login-scan")
+        // change class pr-24 to pr-10
+        login_scan.classList.remove("pr-24")
+        login_scan.classList.add("pr-10")
+
+        // change class pl-24 to pl-10
+        login_scan.classList.remove("pl-24")
+        login_scan.classList.add("pl-10")
+    }
+</script>
 {% endblock %}
