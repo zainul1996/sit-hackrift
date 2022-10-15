@@ -12,24 +12,27 @@ app = Flask(__name__)
 dotenv_path = Path('credentials.env')
 load_dotenv(dotenv_path=dotenv_path)
 password = os.getenv('PASSWORD')
-client = pymongo.MongoClient("mongodb+srv://rushhour:"+password+"@cluster0.ksdhfcl.mongodb.net/?retryWrites=true&w=majority")
+client = pymongo.MongoClient("mongodb+srv://rushhour:"+password +
+                             "@cluster0.ksdhfcl.mongodb.net/?retryWrites=true&w=majority")
 db = client.hackrift
-
 
 
 @app.route("/")
 @app.route("/index")
 def index():
-	return render_template("index.html")
+    return render_template("index.html")
 
 # routes for pwa
+
+
 @app.route("/manifest.webmanifest")
 def manifest():
-	return send_from_directory("static", "manifest.json")
+    return send_from_directory("static", "manifest.json")
+
 
 @app.route("/sw.js")
 def service_worker():
-	return send_from_directory("static", "sw.js")
+    return send_from_directory("static", "sw.js")
 
 @app.route("/user", methods= ['GET'])
 def get_user():
@@ -40,8 +43,7 @@ def get_user():
 	except bson.errors.InvalidId:
 		return("Failed, non existing id")
 
-
-@app.route('/createUser',methods = ['POST'])
+@app.route('/createUser', methods=['POST'])
 def create_user():
 	content = request.json
 	if not content:
@@ -52,7 +54,7 @@ def create_user():
 	x = db['user'].insert_one(content)
 	return("Success")
 
-@app.route("/matchmake", methods= ['GET'])
+@app.route("/matchmake", methods=['GET'])
 def get_matchmake():
 	id = request.args.get('id')
 	if not id:
@@ -63,14 +65,63 @@ def get_matchmake():
 	except bson.errors.InvalidId:
 		return("Failed, non existing id")
 
-@app.route('/creatematchmake',methods = ['POST'])
+@app.route('/creatematchmake', methods=['POST'])
 def create_matchmake():
-	content = request.json
-	if not content:
-		return ("Failed, Not Json")
+    content = request.json
+    if not content:
+        return ("Failed, Not Json")
 
-	x = db['matchmake'].insert_one(content)
-	return("Success")
+    col = db.get_collection("matchmake")
+    res = col.find_one({
+        "startAge": {
+            "$lte": content["userage"],
+        },
+        "endAge": {
+            "$gte": content["userage"],
+        },
+        "activity": {
+            "$in": content["activity"]
+        },
+        "gender": content["usergender"],
+        "locations": {
+            "$in": content["locations"]
+        },
+        "$or": [{
+            "startDate": {
+                "$lte": content["endDate"],
+            },
+            "endDate": {
+                "$gte": content["startDate"],
+            }
+        }],
+        "$or": [{
+            "startDuration": {
+                "$lte": content["endDuration"],
+            },
+            "endDuration": {
+                "$gte": content["startDuration"],
+            },
+        }],
+        "usergender": {
+            "$in": content["gender"]
+        },
+        "userage": {
+            "$gte": content["startAge"],
+            "$lte": content["endAge"]
+        },
+		"userMMR": {
+			"$lte": content["userMMR"] + 50,
+			"$gte": content["userMMR"] - 50
+		}
+    })
+
+    if res is None:
+        x = db['matchmake'].insert_one(content)
+
+	## TODO return matched
+
+    print(res)
+    return("Success")
 
 @app.route("/room", methods= ['GET'])
 def get_room():
@@ -139,4 +190,4 @@ def create_facilities():
 	return("Success")
 
 if __name__ == '__main__':
-	app.run(debug=True, port=8080)
+    app.run(debug=True, port=8080)
