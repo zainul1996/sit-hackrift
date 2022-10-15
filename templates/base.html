@@ -17,34 +17,28 @@
     <div>
         {% block body %}{% endblock %}
         <!-- Bottom Navbar Start -->
-        <div class="absolute inset-x-0 h-16 px-5 bottom-4 md:w-1/2 md:m-auto md:top-4 md:bottom-auto"
+        <div class="absolute inset-x-0 w-4/6 h-16 px-5 m-auto md:w-1/2 bottom-4 lg:w-1/3 md:top-4 md:bottom-auto"
             id="bottom-navbar">
             <div
                 class="sticky flex items-center justify-between p-5 px-6 mx-2 text-gray-300 bg-gray-900 rounded-full cursor-pointer md:bg-gray-700 bottom-2 shadow-3xl">
-                <div class="flex flex-col items-center transition duration-200 ease-in hover:text-blue-400">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z">
-                        </path>
+                <div class="flex flex-col items-center transition duration-200 ease-in hover:text-blue-400"
+                    onclick="window.location.href='/home'">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
                     </svg>
                 </div>
-                <div class="flex flex-col items-center transition duration-200 ease-in hover:text-blue-400">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                <div class="flex flex-col items-center transition duration-200 ease-in hover:text-blue-400"
+                    onclick="window.location.href='/lobby'">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
                     </svg>
                 </div>
-
-                <div class="flex flex-col items-center transition duration-200 ease-in hover:text-blue-400">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
-                    </svg>
-                </div>
-                <div class="flex flex-col items-center transition duration-200 ease-in hover:text-blue-400">
+                <div class="flex flex-col items-center transition duration-200 ease-in hover:text-blue-400"
+                    onclick="window.location.href='/profile'">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <a href="/profile">

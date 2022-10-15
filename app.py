@@ -7,6 +7,7 @@ import pymongo
 import os
 import json
 import datetime
+import time
 
 app = Flask(__name__)
 
@@ -97,6 +98,8 @@ def create_matchmake():
     content["endDate"] = datetime.datetime.strptime(
         content["endDate"], "%Y-%m-%dT%H:%M:%S.000Z")
 
+    time.sleep(5)
+
     if not content:
         return ("Failed, Not Json")
 
@@ -141,7 +144,8 @@ def create_matchmake():
         "userMMR": {
             "$lte": content["userMMR"] + 50,
             "$gte": content["userMMR"] - 50
-        }
+        },
+        "match": { "$eq": 0 }
     })
 
     if res is None:
