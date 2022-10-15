@@ -6,6 +6,7 @@ import bson
 import pymongo
 import os
 import json
+import datetime
 
 app = Flask(__name__)
 
@@ -38,40 +39,50 @@ def manifest():
 def service_worker():
     return send_from_directory("static", "sw.js")
 
-@app.route("/user", methods= ['GET'])
+
+@app.route("/user", methods=['GET'])
 def get_user():
-	id = request.args.get('id')
-	try:
-		user = db['user'].find_one({'_id': ObjectId(id)})
-		return(json.loads(json.dumps(user,default=str)))
-	except bson.errors.InvalidId:
-		return("Failed, non existing id")
+    id = request.args.get('id')
+    try:
+        user = db['user'].find_one({'_id': ObjectId(id)})
+        return(json.loads(json.dumps(user, default=str)))
+    except bson.errors.InvalidId:
+        return("Failed, non existing id")
+
 
 @app.route('/createUser', methods=['POST'])
 def create_user():
-	content = request.json
-	if not content:
-		return ("Failed, Not Json")
-	if not all(k in content for k in ("name","age","gender","mmr","blocked")):
-		return ("Failed, No proper keys")
+    content = request.json
+    if not content:
+        return ("Failed, Not Json")
+    if not all(k in content for k in ("name", "age", "gender", "mmr", "blocked")):
+        return ("Failed, No proper keys")
 
-	x = db['user'].insert_one(content)
-	return("Success")
+    x = db['user'].insert_one(content)
+    return("Success")
+
 
 @app.route("/matchmake", methods=['GET'])
 def get_matchmake():
-	id = request.args.get('id')
-	if not id:
-		return("Failed, no id")
-	try:
-		matchmake = db['matchmake'].find_one({'_id': ObjectId(id)})
-		return(json.loads(json.dumps(matchmake,default=str)))
-	except bson.errors.InvalidId:
-		return("Failed, non existing id")
+    id = request.args.get('id')
+    if not id:
+        return("Failed, no id")
+    try:
+        matchmake = db['matchmake'].find_one({'_id': ObjectId(id)})
+        return(json.loads(json.dumps(matchmake, default=str)))
+    except bson.errors.InvalidId:
+        return("Failed, non existing id")
+
 
 @app.route('/creatematchmake', methods=['POST'])
 def create_matchmake():
     content = request.json
+
+    content["startDate"] = datetime.datetime.strptime(
+        content["startDate"], "%Y-%m-%dT%H:%M:%S.000Z")
+    content["endDate"] = datetime.datetime.strptime(
+        content["endDate"], "%Y-%m-%dT%H:%M:%S.000Z")
+
     if not content:
         return ("Failed, Not Json")
 
@@ -113,46 +124,89 @@ def create_matchmake():
             "$gte": content["startAge"],
             "$lte": content["endAge"]
         },
-		"userMMR": {
-			"$lte": content["userMMR"] + 50,
-			"$gte": content["userMMR"] - 50
-		}
+        "userMMR": {
+            "$lte": content["userMMR"] + 50,
+            "$gte": content["userMMR"] - 50
+        }
     })
 
     if res is None:
         x = db['matchmake'].insert_one(content)
+        return(json.loads(json.dumps({"status": 1}, default=str)))
 
-	## TODO return matched
+    else:
+        content["match"] = res["_id"]
+        _id = db['matchmake'].insert_one(content)
+        col.update_one(
+            {"_id": res["_id"]},
+            {"$set": {"match": _id.inserted_id}}
+        )
 
-    print(res)
+        users = db.get_collection("user")
+        usr = users.find_one({
+            "name": res["userName"]
+        })
+
+        return(json.loads(json.dumps(usr, default=str)))
+
+
+@app.route("/checkmatchmake", methods=['POST'])
+def check_matchmake():
+    name = request.json["userName"]
+    print(name)
+    if not name:
+        return(json.loads(json.dumps({"status": 1, "err": "Failed, no name"}, default=str)))
+
+    try:
+        matchmake = db['matchmake'].find_one({
+            'userName': name,
+            'match': {"$ne": 0}
+        })
+
+        if matchmake is None:
+            return("No request")
+        else:
+            mm = db['matchmake'].find_one({
+                "_id": matchmake["match"]
+            })
+
+            users = db.get_collection("user")
+            usr = users.find_one({
+                "name": mm["userName"]
+            })
+            return (json.loads(json.dumps(usr, default=str)))
+
+    except bson.errors.InvalidId:
+        return("Failed, non existing id")
+
+
+@app.route("/room", methods=['GET'])
+def get_room():
+    id = request.args.get('id')
+    if not id:
+        return("Failed, no id")
+    try:
+        user = db['room'].find_one({'_id': ObjectId(id)})
+        return(json.loads(json.dumps(user, default=str)))
+    except bson.errors.InvalidId:
+        return("Failed, non existing id")
+
+
+@app.route('/createroom', methods=['POST'])
+def create_room():
+    content = request.json
+    if not content:
+        return ("Failed, Not Json")
+
+    try:
+        user = db['user'].find_one({'_id': ObjectId(content['userID'])})
+    except bson.errors.InvalidId:
+        return("Failed, non existing id")
+
+    x = db['room'].insert_one({"filter":content['filter'],"creator":user,"joined":[],"roomStatus":content['roomStatus']})
     return("Success")
 
-@app.route("/room", methods= ['GET'])
-def get_room():
-	id = request.args.get('id')
-	if not id:
-		return("Failed, no id")
-	try:
-		user = db['room'].find_one({'_id': ObjectId(id)})
-		return(json.loads(json.dumps(user,default=str)))
-	except bson.errors.InvalidId:
-		return("Failed, non existing id")
-
-@app.route('/createroom',methods = ['POST'])
-def create_room():
-	content = request.json
-	if not content:
-		return ("Failed, Not Json")
-
-	try:
-		user = db['user'].find_one({'_id': ObjectId(content['userID'])})
-	except bson.errors.InvalidId:
-		return("Failed, non existing id")
-
-	x = db['room'].insert_one({"filter":content['filter'],"creator":user,"joined":[],"roomStatus":content['roomStatus']})
-	return("Success")
-
-@app.route('/joinroom',methods = ['POST'])
+@app.route('/joinroom', methods=['POST'])
 def join_room():
 	content = request.json
 	if not content:
