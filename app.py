@@ -356,4 +356,5 @@ def get_all_location():
 	return(json.loads(json.dumps(mylist, default=str)))
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8080)
+	# ZAINUL: 172.20.10.3
+    app.run(debug=True, port=8080, host='172.20.10.3')
