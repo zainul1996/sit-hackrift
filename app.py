@@ -231,13 +231,12 @@ def create_room():
 
     try:
         user = db['user'].find_one({'_id': ObjectId(content['userID'])})
+        content['filter']['startDate'] = datetime.datetime.strptime(content["filter"]["startDate"], "%Y-%m-%dT%H:%M:%S.000Z")
+        content['filter']['endDate'] = datetime.datetime.strptime(content["filter"]["endDate"], "%Y-%m-%dT%H:%M:%S.000Z")
+        x = db['room'].insert_one({"filter":content['filter'],"creator":user,"joined":[],"roomStatus":content['roomStatus']})
+        return("Success")
     except bson.errors.InvalidId:
         return("Failed, non existing id")
-
-    x = db['room'].insert_one({"filter": content['filter'], "creator": user, "joined": [
-    ], "roomStatus": content['roomStatus']})
-    return("Success")
-
 
 @app.route('/joinroom', methods=['POST'])
 def join_room():
@@ -297,6 +296,31 @@ def get_all_facilities():
     result = {"rooms": list(res)}
     return(json.loads(json.dumps(result, default=str)))
 
+
+@app.route('/filterFacilities',methods=["POST"])
+def filter_facilities():
+	content = request.json
+	query = {}
+	if 'activity' in content:
+		query['filter.activity'] = content['activity']
+	if 'gender' in content:
+		query['filter.gender'] = {"$in": content['gender']}
+	if 'locations' in content:
+		query['filter.locations'] = content['locations']
+	if 'startDate' in content:
+		query['filter.startDate'] = {
+				"$gte": datetime.datetime.strptime(content['startDate'], "%Y-%m-%dT%H:%M:%S.000Z"),
+			}
+	if 'endDate' in content:
+		query['filter.endDate'] = {
+				"$lte": datetime.datetime.strptime(content["endDate"], "%Y-%m-%dT%H:%M:%S.000Z")
+			}
+		
+	query['roomStatus'] = 1
+	res = db['room'].find(query)
+
+	result = {"rooms":list(res)}
+	return(json.loads(json.dumps(result,default=str)))
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080)
