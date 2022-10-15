@@ -27,6 +27,10 @@ def index():
 def home():
 	return render_template("home.html")
 
+@app.route("/lobby")
+def lobby():
+	return render_template("lobby.html")
+
 # routes for pwa
 
 
