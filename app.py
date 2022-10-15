@@ -206,5 +206,24 @@ def get_all_facilities():
 	result = {"rooms":list(res)}
 	return(json.loads(json.dumps(result,default=str)))
 
+@app.route('/filterFacilities',methods=["POST"])
+def filter_facilities():
+	content = request.json
+	query = {}
+	if 'activity' in content:
+		query['filter.activity'] = content['activity']
+	if 'gender' in content:
+		query['filter.gender'] = {"$in": content['gender']}
+	if 'locations' in content:
+		query['filter.locations'] = content['locations']
+	if 'date' in content:
+		query['filter.date'] = content['date']
+	# if 'startTime' in content:
+	# 	query['filter.startTime']
+	
+	query['roomStatus'] = 1
+
+	return("test")
+
 if __name__ == '__main__':
     app.run(debug=True, port=8080)
