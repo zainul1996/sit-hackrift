@@ -94,7 +94,7 @@ def create_room():
 	except bson.errors.InvalidId:
 		return("Failed, non existing id")
 
-	x = db['room'].insert_one({"filter":content['filter'],"creator":user,"joined":[]})
+	x = db['room'].insert_one({"filter":content['filter'],"creator":user,"joined":[],"roomStatus":content['roomStatus']})
 	return("Success")
 
 @app.route('/joinroom',methods = ['POST'])
@@ -128,6 +128,15 @@ def join_room():
 				return("Failed, user not found")
 	except bson.errors.InvalidId:
 		return("Failed, room not found")
+
+@app.route('/createFacilities',methods = ['POST'])
+def create_facilities():
+	content = request.json
+	if not content:
+		return ("Failed, Not Json")
+
+	x = db['facilities'].insert_one(content)
+	return("Success")
 
 if __name__ == '__main__':
 	app.run(debug=True, port=8080)
