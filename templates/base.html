@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
     <link rel="manifest" href="{{url_for('static',filename='manifest.webmanifest')}}">
     <link rel="icon" href="{{url_for('static',filename='favicon.ico')}}" type="image/x-icon">
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/datepicker.js"></script>
 </head>
 
 <body>
@@ -46,9 +47,11 @@
                 <div class="flex flex-col items-center transition duration-200 ease-in hover:text-blue-400">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z">
-                        </path>
+                        <a href="/profile">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z">
+                            </path>
+                        </a>
                     </svg>
                 </div>
             </div>
