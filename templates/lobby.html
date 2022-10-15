@@ -35,7 +35,7 @@
 <script>
     room = `<li class="col-span-1 bg-white divide-y divide-gray-200 rounded-lg shadow">
                         <div class="p-6 text-center">
-                            <h3 class="text-sm font-medium text-gray-900">Create a game</h3>
+                            <h3 class="text-sm font-medium text-gray-900">Make a booking</h3>
                             <p class="mt-1 text-sm text-gray-500">Play with friends or public</p>
                             <div class="mt-4">
                                 <button type="button"
@@ -52,16 +52,32 @@
                             </div>
                         </div>
                     </li>`;
-    for (let i = 0; i < 10; i++) {
-        room += `<li class="col-span-1 bg-white divide-y divide-gray-200 rounded-lg shadow">
+    var myHeaders = new Headers();
+    myHeaders.append("Cookie", "csrftoken=QR23xx5TxOqewhyR3DmwfFfj50EvtQ8CRjn1PhJ5Q7jEzngTqbGoaMbPO3A8Vk6f");
+
+    var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+    };
+
+    fetch("http://127.0.0.1:8080/getAllFacilities", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+        console.log(result['rooms']);
+        for (let i = 0; i < result['rooms'].length; i++) {
+            slots = calculateSlots(result['rooms'][i])
+            room += `<li class="col-span-1 bg-white divide-y divide-gray-200 rounded-lg shadow">
                         <div class="flex items-center justify-between w-full p-6 space-x-6">
                             <div class="flex-1 truncate">
                                 <div class="flex items-center space-x-3">
-                                    <h3 class="text-sm font-medium text-gray-900 truncate">Casual Room (2/4)</h3>
-                                    <span
-                                        class="flex-shrink-0 inline-block px-2 py-0.5 text-green-800 text-xs font-medium bg-green-100 rounded-full">Badminton</span>
+                                    <h3 class="text-sm font-medium text-gray-900 truncate">`+result['rooms'][i]['creator'].name+` (`+slots+`/`+result['rooms'][i]['filter'].roomSize+`)</h3>
+                                    <span class="flex-shrink-0 inline-block px-2 py-0.5 text-green-800 text-xs font-medium bg-green-100 rounded-full">`+result['rooms'][i]['filter'].activity+`</span>
+                                    <span class="flex-shrink-0 inline-block px-2 py-0.5 text-purple-800 text-xs font-medium bg-purple-100 rounded-full">Rating `+result['rooms'][i]['creator'].mmr+`</span>
                                 </div>
-                                <p class="mt-1 text-sm text-gray-500 truncate">Fuchun CC</p>
+                                <span class="flex-shrink-0 inline-block px-2 py-0.5 text-red-800 text-xs font-medium bg-red-100 rounded-full">`+result['rooms'][i]['filter'].locations+`</span>
+                                <p class="mt-1 text-sm text-gray-500 truncate">`+result['rooms'][i]['filter'].startDate+`</p>
+                                <p class="mt-1 text-sm text-gray-500 truncate">`+result['rooms'][i]['filter'].endDate+`</p>
                             </div>
                             <img class="flex-shrink-0 w-10 h-10 bg-gray-300 rounded-full"
                                 src="https://cdn-icons-png.flaticon.com/512/447/447840.png" alt="">
@@ -84,8 +100,15 @@
                             </div>
                         </div>
                     </li>`;
+        }
+        document.getElementById('lobbyrooms').innerHTML = room;
+    })
+    .catch(error => console.log('error', error));
+
+    function calculateSlots(room){
+        joined = room['joined'].length
+        return 1+joined
     }
     
-    document.getElementById('lobbyrooms').innerHTML = room;
 </script>
 {% endblock %}
