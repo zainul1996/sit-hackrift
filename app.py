@@ -144,7 +144,8 @@ def create_matchmake():
         "userMMR": {
             "$lte": content["userMMR"] + 50,
             "$gte": content["userMMR"] - 50
-        }
+        },
+        "match": { "$eq": 0 }
     })
 
     if res is None:
