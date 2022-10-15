@@ -85,7 +85,7 @@
                                     <h3 class="text-lg font-medium leading-6 text-gray-900">Create Game</h3>
                                 </div>
                                 <div class="space-y-6 sm:space-y-5">
-                                    
+
                                     <div
                                         class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                                         <label for="country"
@@ -107,10 +107,10 @@
                                         <label for="first-name"
                                             class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                                             Location </label>
-                                        <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                            <input type="search" id="search-dropdown"
-                                            class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm"
-                                            placeholder="Enter Preferences.." required>
+                                        <div class="mt-1 sm:mt-0 sm:col-span-2 autocomplete">
+                                            <input type="text" name="myCountry" placeholder="Country" id="myInput"
+                                                class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm placeholder:italic focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm !bg-white"
+                                                placeholder="Enter Preferences.." required>
                                         </div>
                                     </div>
 
@@ -145,14 +145,14 @@
                                                     </svg>
                                                 </div>
                                                 <input datepicker datepicker-autohide type="text"
-                                                    class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pl-10 p-2.5"
+                                                    class="block w-full !bg-white max-w-lg border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pl-10 p-2.5"
                                                     placeholder="Select date">
                                             </div>
                                         </div>
                                         <div class="mt-1 sm:mt-0 sm:col-span-1">
-                                            <input type="text" name="last-name" id="last-name" placeholder="18:00"
-                                                autocomplete="family-name"
-                                                class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm placeholder:italic focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                                            <input type="text" name="last-name" id="last-name"
+                                                placeholder="18:00 (hh:mm)" autocomplete="family-name"
+                                                class="block w-full max-w-lg !bg-white border-gray-300 rounded-md shadow-sm placeholder:italic focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
                                         </div>
                                     </div>
 
@@ -175,14 +175,14 @@
                                                     </svg>
                                                 </div>
                                                 <input datepicker datepicker-autohide type="text" id="datepickerTo"
-                                                    class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pl-10 p-2.5"
+                                                    class="block w-full max-w-lg !bg-white border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pl-10 p-2.5"
                                                     placeholder="Select date">
                                             </div>
                                         </div>
                                         <div class="mt-1 sm:mt-0 sm:col-span-1">
-                                            <input type="text" name="timeTo" id="timeTo" placeholder="18:00"
+                                            <input type="text" name="timeTo" id="timeTo" placeholder="20:00 (hh:mm)"
                                                 autocomplete="family-name"
-                                                class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm placeholder:italic focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                                                class="block w-full max-w-lg !bg-white border-gray-300 rounded-md shadow-sm placeholder:italic focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
                                         </div>
                                     </div>
                                 </div>
@@ -203,27 +203,7 @@
     </div>
 </div>
 <script>
-    const datepickerFrom = document.getElementById('datepickerFrom');
-    new Datepicker(datepickerFrom, {
-        autohide: true,
-        format: 'dd/mm/yyyy',
-        language: 'en',
-        orientation: 'bottom',
-        todayHighlight: true,
-        weekStart: 1,
-    });
-
-    const datepickerTo = document.getElementById('datepickerTo');
-    new Datepicker(datepickerTo, {
-        autohide: true,
-        format: 'dd/mm/yyyy',
-        language: 'en',
-        orientation: 'bottom',
-        todayHighlight: true,
-        weekStart: 1,
-    }); 
-
-    var filter = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua &amp; Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia &amp; Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central Arfrican Republic", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica", "Cote D Ivoire", "Croatia", "Cuba", "Curacao", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "French West Indies", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauro", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Pierre &amp; Miquelon", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "St Kitts &amp; Nevis", "St Lucia", "St Vincent", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor L'Este", "Togo", "Tonga", "Trinidad &amp; Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks &amp; Caicos", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe"];
+    var countries = ["Pasir Ris 5 a side Soccer (Artificial Field)", "Beatty Secondary School Field", "Sengkang Secondary School Field", "Regent Secondary School", "Burghley Tennis Centre", "Choa Chu Kang Tennis Centre", "Bishan Club House", "Yio Chu Kang Tennis Centre", "Clementi Sports Hall", "Woodlands Sports Hall", "Pasir Ris Sports Hall", "Heartbeat @ Bedok Table Tennis Area", "Gongshang Primary School Hall", "Greendale Primary School Hall", "North Vista Primary School Hall", "Concord Primary School Hall", "Bedok Green Primary School Hall", "Peiying Primary School Hall", "Bishan Clubhouse", "Pasir Ris Crest Secondary School Hall"];
     function autocomplete(inp, arr) {
         /*the autocomplete function takes two arguments,
         the text field element and an array of possible autocompleted values:*/
@@ -238,7 +218,7 @@
             /*create a DIV element that will contain the items (values):*/
             a = document.createElement("DIV");
             a.setAttribute("id", this.id + "autocomplete-list");
-            a.setAttribute("class", "autocomplete-items absolute max-h-72 overflow-auto");
+            a.setAttribute("class", "autocomplete-items");
             /*append the DIV element as a child of the autocomplete container:*/
             this.parentNode.appendChild(a);
             /*for each item in the array...*/
@@ -319,9 +299,28 @@
         document.addEventListener("click", function (e) {
             closeAllLists(e.target);
         });
-        
     }
-    autocomplete(document.getElementById("search-dropdown"), filter);
+    autocomplete(document.getElementById("myInput"), countries);
+
+    const datepickerFrom = document.getElementById('datepickerFrom');
+    new Datepicker(datepickerFrom, {
+        autohide: true,
+        format: 'dd/mm/yyyy',
+        language: 'en',
+        orientation: 'bottom',
+        todayHighlight: true,
+        weekStart: 1,
+    });
+
+    const datepickerTo = document.getElementById('datepickerTo');
+    new Datepicker(datepickerTo, {
+        autohide: true,
+        format: 'dd/mm/yyyy',
+        language: 'en',
+        orientation: 'bottom',
+        todayHighlight: true,
+        weekStart: 1,
+    });
 
 </script>
 {% endblock %}
