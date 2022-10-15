@@ -314,11 +314,15 @@ def filter_facilities():
 	content = request.json
 	query = {}
 	if 'activity' in content:
-		query['filter.activity'] = content['activity']
+		query['filter.activity'] = {
+			"$in": content['activity']
+		}
 	if 'gender' in content:
 		query['filter.gender'] = {"$in": content['gender']}
 	if 'locations' in content:
-		query['filter.locations'] = content['locations']
+		query['filter.locations'] = {
+			"$in": content['locations']
+		}
 	if 'startDate' in content:
 		query['filter.startDate'] = {
 				"$gte": datetime.datetime.strptime(content['startDate'], "%Y-%m-%dT%H:%M:%S.000Z"),
@@ -333,6 +337,19 @@ def filter_facilities():
 
 	result = {"rooms":list(res)}
 	return(json.loads(json.dumps(result,default=str)))
+
+@app.route('/getAllLocation',methods=["GET"])
+def get_all_location():
+	res = db['facilities'].find()
+	result = list(res)
+	location = []
+	for x in result[0]['facilityType']:
+		for obj in result[0]['facilityType'][x]:
+			print(obj)
+			location.append(obj['location'])
+	mylist = list(set(location))
+	print(mylist)
+	return(json.loads(json.dumps(mylist, default=str)))
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080)
