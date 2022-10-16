@@ -24,9 +24,13 @@ db = client.hackrift
 def index():
     return render_template("loginPage.html")
 
-
+@app.route("/booking")
 @app.route("/home")
 def home():
+    return render_template("booking.html")
+
+@app.route("/match")
+def match():
     return render_template("matchmakingPage.html")
 
 @app.route("/lobby")
@@ -40,6 +44,10 @@ def create():
 @app.route("/profile")
 def profile():
 	return render_template("profile.html")
+
+@app.route("/bookings")
+def bookings():
+	return render_template("bookings.html")
 
 # routes for pwa
 
@@ -356,5 +364,5 @@ def get_all_location():
 	return(json.loads(json.dumps(mylist, default=str)))
 
 if __name__ == '__main__':
-	# ZAINUL: 172.20.10.3
-    app.run(debug=True, port=8080, host='172.20.10.3')
+	# ZAINUL: 192.168.1.4
+    app.run(debug=True, port=8080, host='192.168.1.4')

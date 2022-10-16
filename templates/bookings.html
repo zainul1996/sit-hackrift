@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="min-h-screen bg-gray-700">
+    <div class="flex flex-col min-h-screen bg-gray-700">
+        <!-- Page heading -->
+        <div class="bg-gray-800 ">
+            <header class="py-8 md:mt-16">
+                <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 xl:flex xl:items-center xl:justify-between">
+                    <div class="flex-1 min-w-0">
+                        <h1 class="mt-2 text-2xl font-bold leading-7 text-white sm:text-3xl sm:truncate">Zainul Ariffin
+                        </h1>
+                    </div>
+                </div>
+            </header>
+        </div>
+
+        <div class="flex flex-col">
+            <div class="grid px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div id="matchmake-section" class="flex flex-grow pt-20" style="display: block">
+                    <div class="grid content-center p-8 px-4 mx-auto bg-gray-200 max-w-7xl sm:px-6 lg:px-8 rounded-2xl">
+                        <div class="text-center">
+                            <svg class="w-12 h-12 mx-auto text-gray-400" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" aria-hidden="true">
+                                <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                            </svg>
+                            <h3 class="mt-2 text-sm font-medium text-gray-900">No current bookings</h3>
+                            <p class="mt-1 text-sm text-gray-500">Join a room at
+                                <a class="underline" href="/lobby">/lobby</a>
+                                or find a partner at
+                                <a class="underline" href="/match">/match</a>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+</script>
+{% endblock %}

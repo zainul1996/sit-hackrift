@@ -17,12 +17,22 @@
     <div>
         {% block body %}{% endblock %}
         <!-- Bottom Navbar Start -->
-        <div class="absolute inset-x-0 w-4/6 h-16 px-5 m-auto md:w-1/2 bottom-4 lg:w-1/3 md:top-4 md:bottom-auto"
+        <div class="fixed inset-x-0 w-4/6 h-16 px-5 m-auto md:absolute md:w-1/2 bottom-16 lg:w-1/3 md:top-4 md:bottom-auto"
             id="bottom-navbar">
             <div
                 class="sticky flex items-center justify-between p-5 px-6 mx-2 text-gray-300 bg-gray-900 rounded-full cursor-pointer md:bg-gray-700 bottom-2 shadow-3xl">
                 <div class="flex flex-col items-center transition duration-200 ease-in hover:text-blue-400"
-                    onclick="window.location.href='/home'">
+                    onclick="window.location.href='/bookings'">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                    </svg>
+
+
+                </div>
+                <div class="flex flex-col items-center transition duration-200 ease-in hover:text-blue-400"
+                    onclick="window.location.href='/match'">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -54,6 +64,16 @@
     <!-- Bottom Navbar end -->
     <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
     <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
+    <script>
+        if (window.location.pathname == "/" || window.location.pathname == "/profile") {
+            // document.getElementById("bottom-navbar").style.display = "block";
+        } else {
+            // document.getElementById("bottom-navbar").style.display = "none";
+        }
+
+
+
+    </script>
 </body>
 
 </html>
