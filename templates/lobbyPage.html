@@ -154,6 +154,14 @@
         headers: myHeaders,
         redirect: 'follow'
     };
+    function getLogo(activity) {
+        if (activity == "soccer") {
+            return "https://aux.iconspalace.com/uploads/football-icon-256-1281892144.png"
+        }
+        else if (activity == "badminton") {
+            return "https://cdn-icons-png.flaticon.com/512/447/447840.png"
+        }
+    }
     function populateLobby() {
         fetch("/getAllFacilities", requestOptions)
             .then(response => response.json())
@@ -175,7 +183,7 @@
                                 <p class="mt-1 text-sm text-gray-500 truncate">Ends on `+ endDate + `</p>
                             </div>
                             <img class="flex-shrink-0 w-10 h-10 bg-gray-300 rounded-full"
-                                src="https://cdn-icons-png.flaticon.com/512/447/447840.png" alt="">
+                                src="`+ getLogo(result['rooms'][i]['filter']['activity']) + `" alt="">
                         </div>
                         <div>
                             <div class="flex -mt-px divide-x divide-gray-200">
