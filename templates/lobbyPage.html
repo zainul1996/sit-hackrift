@@ -159,6 +159,8 @@
             .then(response => response.json())
             .then(result => {
                 for (let i = 0; i < result['rooms'].length; i++) {
+                    var startDate = moment(result['rooms'][i]['filter'].startDate).format('MMM DD h:mm A')
+                    var endDate = moment(result['rooms'][i]['filter'].endDate).format('MMM DD h:mm A')
                     slots = calculateSlots(result['rooms'][i])
                     room += `<li class="col-span-1 bg-white divide-y divide-gray-200 rounded-lg shadow">
                         <div class="flex items-center justify-between w-full p-6 space-x-6">
@@ -169,8 +171,8 @@
                                     <span class="flex-shrink-0 inline-block px-2 py-0.5 text-purple-800 text-xs font-medium bg-purple-100 rounded-full">Rating `+ result['rooms'][i]['creator'].mmr + `</span>
                                 </div>
                                 <span class="flex-shrink-0 inline-block px-2 py-0.5 text-red-800 text-xs font-medium bg-red-100 rounded-full">`+ result['rooms'][i]['filter'].locations + `</span>
-                                <p class="mt-1 text-sm text-gray-500 truncate">`+ result['rooms'][i]['filter'].startDate + `</p>
-                                <p class="mt-1 text-sm text-gray-500 truncate">`+ result['rooms'][i]['filter'].endDate + `</p>
+                                <p class="mt-1 text-sm text-gray-500 truncate">`+ startDate + `</p>
+                                <p class="mt-1 text-sm text-gray-500 truncate">`+ endDate + `</p>
                             </div>
                             <img class="flex-shrink-0 w-10 h-10 bg-gray-300 rounded-full"
                                 src="https://cdn-icons-png.flaticon.com/512/447/447840.png" alt="">
