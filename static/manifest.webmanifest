@@ -1,11 +1,11 @@
 {
     "name": "Sportify",
     "short_name": "Sporify",
-    "description": "A progressive webapp template built with Flask",
+    "description": "One stop location to book facilities!",
     "display": "standalone",
     "orientation": "portrait",
-    "theme_color": "#333333",
-    "background_color": "#333333",
+    "theme_color": "#1F2937",
+    "background_color": "#1F2937",
     "start_url": "/index",
     "icons": [
         {

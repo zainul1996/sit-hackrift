@@ -384,5 +384,5 @@ def get_my_rooms():
 		return("Failed, no userid")
 
 if __name__ == '__main__':
-	# ZAINUL: 192.168.1.4
+	# ZAINUL: 192.168.1.4/172.20.10.3
     app.run(debug=True, port=8080, host="127.0.0.1")
