@@ -119,8 +119,7 @@
                 <div class="h-full max-w-xs mx-auto text-center align-middle">
                     <span class="inline-block w-64 h-64 overflow-hidden bg-gray-100 rounded-full ">
                         <img id="matchmake-btn" style="cursor: pointer;" class="object-cover w-full h-full"
-                            src="../static/images/play-button-min.jpg"
-                            alt="Profile Picture">
+                            src="../static/images/play-button-min.jpg" alt="Profile Picture">
                     </span>
                     <p id="mm-text" class="mt-2 text-2xl font-medium text-gray-300 dark:text-gray-100">Tap and start
                         finding a
@@ -141,8 +140,7 @@
                         <div class="flex-1 flex flex-col p-8">
                             <h3 class="text-gray-900 text-sm font-medium">Upcoming match</h3>
                             <img class="mt-6 w-32 h-32 flex-shrink-0 mx-auto rounded-full"
-                                src="../static/images/opponent-picture-min.avif"
-                                alt="">
+                                src="../static/images/opponent-picture-min.avif" alt="">
                             <h3 class="mt-6 text-gray-900 text-sm font-medium">Jane Cooper (1394)</h3>
                             <dl class="mt-1 flex-grow flex flex-col justify-between">
                                 <dd class="text-gray-500 text-sm">Woodlands Sports Hall</dd>
@@ -430,8 +428,12 @@
             color = ''
             if (filterType == "sport") {
                 color = 'green'
+                filterSports = filterSports.filter(e => e !== filterName)
+                filter = filterSports
             } else if (filterType == "location") {
                 color = 'red'
+                filterLocation = filterLocation.filter(e => e !== filterName)
+                filter = filterLocation
             }
             currentHTML = document.getElementById('badgeNav').innerHTML
             document.getElementById('badgeNav').innerHTML = currentHTML +
@@ -446,13 +448,21 @@
                     </svg>
                 </button>
             </span>`
+            document.getElementById('search-dropdown').value = ""
         }
-
     }
 
     function removeBadge(filterName, filterType) {
         console.log(filterName)
         console.log(filterType)
+
+        if (filterType == "sport") {
+            filterSports.push(filterName)
+            filter = filterSports
+        } else if (filterType == "location") {
+            filterLocation.push(filterName)
+            filter = filterLocation
+        }
 
         document.getElementById(filterName).remove();
     }
