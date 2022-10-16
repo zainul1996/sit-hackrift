@@ -17,12 +17,12 @@
     <div>
         {% block body %}{% endblock %}
         <!-- Bottom Navbar Start -->
-        <div class="fixed inset-x-0 w-4/6 h-16 px-5 m-auto md:absolute md:w-1/2 bottom-16 lg:w-1/3 md:top-4 md:bottom-auto"
+        <div class="fixed inset-x-0 w-4/6 h-16 px-5 m-auto md:absolute md:w-1/2 bottom-4 lg:w-1/3 md:top-4 md:bottom-auto"
             id="bottom-navbar">
             <div
                 class="sticky flex items-center justify-between p-5 px-6 mx-2 text-gray-300 bg-gray-900 rounded-full cursor-pointer md:bg-gray-700 bottom-2 shadow-3xl">
                 <div class="flex flex-col items-center transition duration-200 ease-in hover:text-blue-400"
-                    onclick="window.location.href='/bookings'">
+                    id="bookings" onclick="window.location.href='/bookings'">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -32,14 +32,14 @@
 
                 </div>
                 <div class="flex flex-col items-center transition duration-200 ease-in hover:text-blue-400"
-                    onclick="window.location.href='/match'">
+                    id="matchmake" onclick="window.location.href='/match'">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
                     </svg>
                 </div>
-                <div class="flex flex-col items-center transition duration-200 ease-in hover:text-blue-400"
+                <div class="flex flex-col items-center transition duration-200 ease-in hover:text-blue-400" id="lobby"
                     onclick="window.location.href='/lobby'">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -47,7 +47,7 @@
                             d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
                     </svg>
                 </div>
-                <div class="flex flex-col items-center transition duration-200 ease-in hover:text-blue-400"
+                <div class="flex flex-col items-center transition duration-200 ease-in hover:text-blue-400" id="profile"
                     onclick="window.location.href='/profile'">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -65,11 +65,30 @@
     <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
     <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
     <script>
-        if (window.location.pathname == "/" || window.location.pathname == "/profile") {
-            // document.getElementById("bottom-navbar").style.display = "block";
-        } else {
-            // document.getElementById("bottom-navbar").style.display = "none";
+        if (window.location.pathname == "/bookings") {
+            document.getElementById("bookings").classList.add("text-blue-400");
+
         }
+        if (window.location.pathname == "/match") {
+            document.getElementById("matchmake").classList.add("text-blue-400");
+
+        }
+        if (window.location.pathname == "/lobby") {
+            document.getElementById("lobby").classList.add("text-blue-400");
+
+        }
+        if (window.location.pathname == "/profile") {
+            document.getElementById("profile").classList.add("text-blue-400");
+
+        }
+        // if standalone mode, hide bottom navbar
+        // if (!window.navigator.standalone) {
+        //     if (window.navigator.userAgent.match(/Safari/) && !window.navigator.userAgent.match(/Chrome/)) {
+        //         // remove botton-4 and give bottom-16
+        //         document.getElementById("bottom-navbar").classList.remove("bottom-4");
+        //         document.getElementById("bottom-navbar").classList.add("bottom-16");
+        //     }
+        // }
 
 
 
