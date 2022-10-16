@@ -119,10 +119,11 @@
                 <div class="h-full max-w-xs mx-auto text-center align-middle">
                     <span class="inline-block w-64 h-64 overflow-hidden bg-gray-100 rounded-full ">
                         <img id="matchmake-btn" style="cursor: pointer;" class="object-cover w-full h-full"
-                            src="https://www.nicepng.com/png/detail/816-8167151_vector-illustration-of-sports-balls-with-football-all.png"
+                            src="../static/images/play-button-min.jpg"
                             alt="Profile Picture">
                     </span>
-                    <p id="mm-text" class="mt-2 text-2xl font-medium text-gray-300 dark:text-gray-100">Tap and start finding a
+                    <p id="mm-text" class="mt-2 text-2xl font-medium text-gray-300 dark:text-gray-100">Tap and start
+                        finding a
                         game!
                     </p>
                 </div>
@@ -140,7 +141,7 @@
                         <div class="flex-1 flex flex-col p-8">
                             <h3 class="text-gray-900 text-sm font-medium">Upcoming match</h3>
                             <img class="mt-6 w-32 h-32 flex-shrink-0 mx-auto rounded-full"
-                                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
+                                src="../static/images/opponent-picture-min.avif"
                                 alt="">
                             <h3 class="mt-6 text-gray-900 text-sm font-medium">Jane Cooper (1394)</h3>
                             <dl class="mt-1 flex-grow flex flex-col justify-between">
@@ -313,14 +314,14 @@
     }
 
     var filter = []
-    var filterLocation = ['Gongshang Primary School Hall','Greendale Primary School Hall','North Vista Primary School Hall','Concord Primary School Hall','Bedok Green Primary School Hall','Peiying Primary School Hall','Bishan Clubhouse','Pasir Ris Crest Secondary School Hall', 'Clementi Sports Hall','Woodlands Sports Hall','Pasir Ris Sports Hall','Heartbeat @ Bedok Table Tennis Area','Pasir Ris 5 a side Soccer (Artificial Field)','Beatty Secondary School Field','Sengkang Secondary School Field','Regent Secondary School','Burghley Tennis Centre','Choa Chu Kang Tennis Centre','Bishan Club House','Yio Chu Kang Tennis Centre']
-    var filterSports = ['Badminton','Soccer','Table Tennis','Tennis']
+    var filterLocation = ['Gongshang Primary School Hall', 'Greendale Primary School Hall', 'North Vista Primary School Hall', 'Concord Primary School Hall', 'Bedok Green Primary School Hall', 'Peiying Primary School Hall', 'Bishan Clubhouse', 'Pasir Ris Crest Secondary School Hall', 'Clementi Sports Hall', 'Woodlands Sports Hall', 'Pasir Ris Sports Hall', 'Heartbeat @ Bedok Table Tennis Area', 'Pasir Ris 5 a side Soccer (Artificial Field)', 'Beatty Secondary School Field', 'Sengkang Secondary School Field', 'Regent Secondary School', 'Burghley Tennis Centre', 'Choa Chu Kang Tennis Centre', 'Bishan Club House', 'Yio Chu Kang Tennis Centre']
+    var filterSports = ['Badminton', 'Soccer', 'Table Tennis', 'Tennis']
 
     filter = filterLocation
     // var countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua &amp; Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia &amp; Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central Arfrican Republic", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica", "Cote D Ivoire", "Croatia", "Cuba", "Curacao", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "French West Indies", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauro", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Pierre &amp; Miquelon", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "St Kitts &amp; Nevis", "St Lucia", "St Vincent", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor L'Este", "Togo", "Tonga", "Trinidad &amp; Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks &amp; Caicos", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe"];
     function autocomplete(inp) {
         /*the autocomplete function takes two arguments,
-        the text field element and an filteray of possible autocompleted values:*/  
+        the text field element and an filteray of possible autocompleted values:*/
         var currentFocus;
         /*execute a function when someone writes in the text field:*/
         inp.addEventListener("input", function (e) {
@@ -422,23 +423,23 @@
     }
     autocomplete(document.getElementById("search-dropdown"));
 
-    function insertFilter(filterName, filterType){
+    function insertFilter(filterName, filterType) {
         console.log(filter)
-        if(filter.includes(filterName)){
+        if (filter.includes(filterName)) {
             // default indigo
             color = ''
-            if(filterType == "sport"){
+            if (filterType == "sport") {
                 color = 'green'
-            }else if(filterType == "location"){
+            } else if (filterType == "location") {
                 color = 'red'
             }
             currentHTML = document.getElementById('badgeNav').innerHTML
-            document.getElementById('badgeNav').innerHTML = currentHTML + 
-            `<span id="`+filterName+`" value="`+filterType+`"
-                class="inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-`+color+`-100 text-`+color+`-700">
-                `+filterName+`
-                <button type="button" onclick="removeBadge('`+filterName+`','`+filterType+`')"                   
-                    class="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-`+color+`-400 hover:bg-`+color+`-200 hover:text-`+color+`-500 focus:outline-none focus:bg-`+color+`-500 focus:text-white">
+            document.getElementById('badgeNav').innerHTML = currentHTML +
+                `<span id="` + filterName + `" value="` + filterType + `"
+                class="inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-`+ color + `-100 text-` + color + `-700">
+                `+ filterName + `
+                <button type="button" onclick="removeBadge('`+ filterName + `','` + filterType + `')"                   
+                    class="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-`+ color + `-400 hover:bg-` + color + `-200 hover:text-` + color + `-500 focus:outline-none focus:bg-` + color + `-500 focus:text-white">
                     <span class="sr-only">Remove large option</span>
                     <svg class="w-2 h-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
                         <path stroke-linecap="round" stroke-width="1.5" d="M1 1l6 6m0-6L1 7" />
@@ -446,21 +447,21 @@
                 </button>
             </span>`
         }
-        
+
     }
 
-    function removeBadge(filterName,filterType){
+    function removeBadge(filterName, filterType) {
         console.log(filterName)
         console.log(filterType)
 
         document.getElementById(filterName).remove();
     }
 
-    function categoryClick(category){
-        if(category == 'location'){
+    function categoryClick(category) {
+        if (category == 'location') {
             filter = filterLocation
         }
-        else{
+        else {
             filter = filterSports
         }
         document.getElementById('dropdown-button').innerHTML = category
