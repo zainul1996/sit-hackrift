@@ -1,6 +1,6 @@
 {
     "name": "Sportify",
-    "short_name": "Sporify",
+    "short_name": "Sportify",
     "description": "One stop location to book facilities!",
     "display": "standalone",
     "orientation": "portrait",
