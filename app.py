@@ -273,7 +273,7 @@ def join_room():
         slots -= len(room['joined'])
         currentRoomSize = len(room['joined'])+1
         if not slots > 0:
-            return("room is full")
+            return("Room is full")
         else:
             if str(content['userID']) == str(room['creator']['_id']):
                 return("Failed, cant join your own room")
@@ -282,7 +282,7 @@ def join_room():
                 for x in room['joined']:
                     print(x['_id'])
                     if str(x['_id']) == content['userID']:
-                        return("Failed, user already joined room")
+                        return("Failed, you already joined room")
             try:
                 user = db['user'].find_one(
                     {'_id': ObjectId(content['userID'])})
@@ -292,7 +292,7 @@ def join_room():
                     room['roomStatus'] = 0
                 db['room'].update_one({'_id': ObjectId(content['roomID'])}, {
                                       "$set": room}, upsert=False)
-                return(user['name']+" joined "+room['creator']['name']+"'s room")
+                return("Successfully joined "+room['creator']['name']+"'s room")
             except bson.errors.InvalidId:
                 return("Failed, user not found")
     except bson.errors.InvalidId:
