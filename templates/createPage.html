@@ -79,122 +79,121 @@
             <div class="grid mx-auto max-w-7xl">
                 <div class="w-screen px-6 mx-auto max-w-7xl lg:px-8">
                     <!-- <form class="w-full space-y-8 divide-y divide-gray-200"> -->
-                        <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
-                            <div class="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
-                                <div>
-                                    <h3 class="text-lg font-medium leading-6 text-gray-900">Create Game</h3>
+                    <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+                        <div class="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
+                            <div>
+                                <h3 class="text-lg font-medium leading-6 text-gray-900">Create Game</h3>
+                            </div>
+                            <div class="space-y-6 sm:space-y-5">
+
+                                <div
+                                    class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                                    <label for="country"
+                                        class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                        Activity </label>
+                                    <div class="mt-1 sm:mt-0 sm:col-span-2">
+                                        <select id="country" name="country" autocomplete="country-name"
+                                            onchange="activityChange()"
+                                            class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                                            <option>Badminton</option>
+                                            <option>Table Tennis</option>
+                                            <option>Tennis</option>
+                                            <option>Soccer</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="space-y-6 sm:space-y-5">
 
-                                    <div
-                                        class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                                        <label for="country"
-                                            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                            Activity </label>
-                                        <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                            <select id="country" name="country" autocomplete="country-name" onchange="activityChange()"
-                                                class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
-                                                <option>Badminton</option>
-                                                <option>Table Tennis</option>
-                                                <option>Tennis</option>
-                                                <option>Soccer</option>
-                                            </select>
-                                        </div>
+                                <div
+                                    class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                                    <label for="first-name"
+                                        class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                        Location </label>
+                                    <div class="mt-1 sm:mt-0 sm:col-span-2 autocomplete">
+                                        <input type="text" name="myCountry" placeholder="Pick Venue" id="myInput"
+                                            class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm placeholder:italic focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm !bg-white"
+                                            placeholder="Enter Preferences.." required>
                                     </div>
+                                </div>
 
-                                    <div
-                                        class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                                        <label for="first-name"
-                                            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                            Location </label>
-                                        <div class="mt-1 sm:mt-0 sm:col-span-2 autocomplete">
-                                            <input type="text" name="myCountry" placeholder="Country" id="myInput"
-                                                class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm placeholder:italic focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm !bg-white"
-                                                placeholder="Enter Preferences.." required>
-                                        </div>
+                                <div
+                                    class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                                    <label for="last-name"
+                                        class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                        Max Room Size </label>
+                                    <div class="mt-1 sm:mt-0 sm:col-span-2">
+                                        <input type="number" name="last-name" id="last-name" placeholder="4"
+                                            autocomplete="family-name"
+                                            class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm placeholder:italic focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
                                     </div>
+                                </div>
 
-                                    <div
-                                        class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                                        <label for="last-name"
-                                            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                            Max Room Size </label>
-                                        <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                            <input type="number" name="last-name" id="last-name" placeholder="4"
-                                                autocomplete="family-name"
-                                                class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm placeholder:italic focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
-                                        </div>
-                                    </div>
-
-                                    <div
-                                        class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                                        <label for="street-address"
-                                            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> From
-                                        </label>
-                                        <div class="mt-1 sm:mt-0 sm:col-span-1">
-                                            <div class="relative">
-                                                <div
-                                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                                    <svg aria-hidden="true"
-                                                        class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                                                        fill="currentColor" viewBox="0 0 20 20"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd"
-                                                            d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                                            clip-rule="evenodd"></path>
-                                                    </svg>
-                                                </div>
-                                                <input datepicker datepicker-autohide type="text" id="fromDate"
-                                                    class="block w-full !bg-white max-w-lg border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pl-10 p-2.5"
-                                                    placeholder="Select date">
+                                <div
+                                    class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                                    <label for="street-address"
+                                        class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> From
+                                    </label>
+                                    <div class="mt-1 sm:mt-0 sm:col-span-1">
+                                        <div class="relative">
+                                            <div
+                                                class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                                                    fill="currentColor" viewBox="0 0 20 20"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd"
+                                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                                        clip-rule="evenodd"></path>
+                                                </svg>
                                             </div>
-                                        </div>
-                                        <div class="mt-1 sm:mt-0 sm:col-span-1">
-                                            <input type="text" name="fromTime" id="fromTime"
-                                                placeholder="18:00 (hh:mm)" autocomplete="family-name"
-                                                class="block w-full max-w-lg !bg-white border-gray-300 rounded-md shadow-sm placeholder:italic focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                                            <input datepicker datepicker-autohide type="text" id="fromDate"
+                                                class="block w-full !bg-white max-w-lg border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pl-10 p-2.5"
+                                                placeholder="Select date">
                                         </div>
                                     </div>
+                                    <div class="mt-1 sm:mt-0 sm:col-span-1">
+                                        <input type="text" name="fromTime" id="fromTime" placeholder="18:00 (hh:mm)"
+                                            autocomplete="family-name"
+                                            class="block w-full max-w-lg !bg-white border-gray-300 rounded-md shadow-sm placeholder:italic focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                                    </div>
+                                </div>
 
-                                    <div
-                                        class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                                        <label for="datepickerTo"
-                                            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> To
-                                        </label>
-                                        <div class="mt-1 sm:mt-0 sm:col-span-1">
-                                            <div class="relative">
-                                                <div
-                                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                                    <svg aria-hidden="true"
-                                                        class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                                                        fill="currentColor" viewBox="0 0 20 20"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd"
-                                                            d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                                            clip-rule="evenodd"></path>
-                                                    </svg>
-                                                </div>
-                                                <input datepicker datepicker-autohide type="text" id="datepickerTo"
-                                                    class="block w-full max-w-lg !bg-white border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pl-10 p-2.5"
-                                                    placeholder="Select date">
+                                <div
+                                    class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                                    <label for="datepickerTo"
+                                        class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> To
+                                    </label>
+                                    <div class="mt-1 sm:mt-0 sm:col-span-1">
+                                        <div class="relative">
+                                            <div
+                                                class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                                                    fill="currentColor" viewBox="0 0 20 20"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd"
+                                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                                        clip-rule="evenodd"></path>
+                                                </svg>
                                             </div>
+                                            <input datepicker datepicker-autohide type="text" id="datepickerTo"
+                                                class="block w-full max-w-lg !bg-white border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pl-10 p-2.5"
+                                                placeholder="Select date">
                                         </div>
-                                        <div class="mt-1 sm:mt-0 sm:col-span-1">
-                                            <input type="text" name="timeTo" id="timeTo" placeholder="20:00 (hh:mm)"
-                                                autocomplete="family-name"
-                                                class="block w-full max-w-lg !bg-white border-gray-300 rounded-md shadow-sm placeholder:italic focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
-                                        </div>
+                                    </div>
+                                    <div class="mt-1 sm:mt-0 sm:col-span-1">
+                                        <input type="text" name="timeTo" id="timeTo" placeholder="20:00 (hh:mm)"
+                                            autocomplete="family-name"
+                                            class="block w-full max-w-lg !bg-white border-gray-300 rounded-md shadow-sm placeholder:italic focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="pt-5">
-                            <div class="flex justify-end">
-                                <button type="submit" onclick="createRoom()"
-                                    class="inline-flex justify-center px-4 py-2 ml-3 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create</button>
-                            </div>
+                    <div class="pt-5">
+                        <div class="flex justify-end">
+                            <button type="submit" onclick="createRoom()"
+                                class="inline-flex justify-center px-4 py-2 ml-3 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create</button>
                         </div>
+                    </div>
                     <!-- </form> -->
                 </div>
             </div>
@@ -204,11 +203,11 @@
 </div>
 <script>
     var locations = []
-    var badmintonLocations = ['Gongshang Primary School Hall','Greendale Primary School Hall','North Vista Primary School Hall','Concord Primary School Hall','Bedok Green Primary School Hall','Peiying Primary School Hall','Bishan Clubhouse','Pasir Ris Crest Secondary School Hall']
-    var tabletennisLocations = ['Clementi Sports Hall','Woodlands Sports Hall','Pasir Ris Sports Hall','Heartbeat @ Bedok Table Tennis Area']
-    var soccerLocations = ['Pasir Ris 5 a side Soccer (Artificial Field)','Beatty Secondary School Field','Sengkang Secondary School Field','Regent Secondary School']
-    var tennisLocations = ['Burghley Tennis Centre','Choa Chu Kang Tennis Centre','Bishan Club House','Yio Chu Kang Tennis Centre']
-    
+    var badmintonLocations = ['Gongshang Primary School Hall', 'Greendale Primary School Hall', 'North Vista Primary School Hall', 'Concord Primary School Hall', 'Bedok Green Primary School Hall', 'Peiying Primary School Hall', 'Bishan Clubhouse', 'Pasir Ris Crest Secondary School Hall']
+    var tabletennisLocations = ['Clementi Sports Hall', 'Woodlands Sports Hall', 'Pasir Ris Sports Hall', 'Heartbeat @ Bedok Table Tennis Area']
+    var soccerLocations = ['Pasir Ris 5 a side Soccer (Artificial Field)', 'Beatty Secondary School Field', 'Sengkang Secondary School Field', 'Regent Secondary School']
+    var tennisLocations = ['Burghley Tennis Centre', 'Choa Chu Kang Tennis Centre', 'Bishan Club House', 'Yio Chu Kang Tennis Centre']
+
     locations = badmintonLocations;
 
     function autocomplete(inp) {
@@ -330,25 +329,25 @@
         weekStart: 1,
     });
 
-    function activityChange(){
-        activity = document.getElementById('country').options[ document.getElementById('country').selectedIndex ].value
-        if(activity == 'Badminton'){
+    function activityChange() {
+        activity = document.getElementById('country').options[document.getElementById('country').selectedIndex].value
+        if (activity == 'Badminton') {
             locations = badmintonLocations;
         }
-        else if (activity == 'Soccer'){
+        else if (activity == 'Soccer') {
             locations = soccerLocations;
         }
-        else if (activity == 'Table Tennis'){
+        else if (activity == 'Table Tennis') {
             locations = tabletennisLocations;
         }
-        else if (activity == 'Tennis'){
+        else if (activity == 'Tennis') {
             locations = tennisLocations;
         }
     }
 
-    function createRoom(){
+    function createRoom() {
         console.log("create room")
-        activity = document.getElementById('country').options[ document.getElementById('country').selectedIndex ].value
+        activity = document.getElementById('country').options[document.getElementById('country').selectedIndex].value
         locationText = document.getElementById('myInput').value
         roomSize = document.getElementById('last-name').value
 
@@ -357,22 +356,22 @@
         toDate = document.getElementById('datepickerTo').value
         toTime = document.getElementById('timeTo').value
 
-        if(activity && locationText && roomSize && fromDate && fromTime && toDate && toTime){
-            if(activity == 'Table Tennis'){
+        if (activity && locationText && roomSize && fromDate && fromTime && toDate && toTime) {
+            if (activity == 'Table Tennis') {
                 activity = 'table_tennis'
-            }else if (activity == 'Tennis'){
+            } else if (activity == 'Tennis') {
                 activity = 'tennis'
             }
-            else if (activity == 'Badminton'){
+            else if (activity == 'Badminton') {
                 activity = 'badminton'
             }
-            else if (activity == 'Soccer'){
+            else if (activity == 'Soccer') {
                 activity = 'soccer'
             }
-            startDate = new Date(fromDate+" "+fromTime);
+            startDate = new Date(fromDate + " " + fromTime);
             startDate = new Date(startDate - (startDate.getTimezoneOffset() * 60000))
             startDate = startDate.toISOString();
-            endDate = new Date(toDate+" "+toTime);
+            endDate = new Date(toDate + " " + toTime);
             endDate = new Date(endDate - (endDate.getTimezoneOffset() * 60000))
             endDate = endDate.toISOString();
 
@@ -381,37 +380,37 @@
             myHeaders.append("Cookie", "csrftoken=QR23xx5TxOqewhyR3DmwfFfj50EvtQ8CRjn1PhJ5Q7jEzngTqbGoaMbPO3A8Vk6f");
 
             var raw = JSON.stringify({
-            "filter": {
-                "activity": activity,
-                "locations": locationText,
-                "startDate": startDate,
-                "endDate": endDate,
-                "roomSize": parseInt(roomSize)
-            },
-            "userID": "6349c0439218286ad81f6575",
-            "joined": [],
-            "roomStatus": 1
+                "filter": {
+                    "activity": activity,
+                    "locations": locationText,
+                    "startDate": startDate,
+                    "endDate": endDate,
+                    "roomSize": parseInt(roomSize)
+                },
+                "userID": "6349c0439218286ad81f6575",
+                "joined": [],
+                "roomStatus": 1
             });
 
             var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
             };
 
             fetch("http://127.0.0.1:8080/createroom", requestOptions)
-            .then(response => response.text())
-            .then(result => {
-                console.log(result);
-                alert("Room created")
-                window.location.href = "http://127.0.0.1:8080/lobby";
-            })
-            .catch(error => console.log('error', error));
-            
+                .then(response => response.text())
+                .then(result => {
+                    console.log(result);
+                    alert("Room created")
+                    window.location.href = "http://127.0.0.1:8080/lobby";
+                })
+                .catch(error => console.log('error', error));
+
         }
-    
-        
+
+
     }
 
 </script>

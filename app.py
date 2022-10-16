@@ -371,7 +371,11 @@ def get_my_rooms():
 		res = db['room'].find(
 			{
 				"roomStatus": 1,
-				"creator._id": ObjectId(content['userid'])
+				"$or":[{
+					"creator._id": ObjectId(content['userid'])},{
+					"joined": {"$elemMatch":{"_id":ObjectId(content['userid'])}}
+				}]
+				
 			}
 		)
 		result = {"rooms": list(res)}
@@ -381,4 +385,4 @@ def get_my_rooms():
 
 if __name__ == '__main__':
 	# ZAINUL: 192.168.1.4
-    app.run(debug=True, port=8080, host="192.168.1.4")
+    app.run(debug=True, port=8080, host="127.0.0.1")

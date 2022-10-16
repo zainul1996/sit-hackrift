@@ -125,7 +125,7 @@
 </div>
 <script>
     room = `<li class="col-span-1 bg-white divide-y divide-gray-200 rounded-lg shadow">
-                        <div class="p-6 text-center">
+                        <div class="p-12 text-center">
                             <h3 class="text-sm font-medium text-gray-900">Make a booking</h3>
                             <p class="mt-1 text-sm text-gray-500">Play with friends or public</p>
                             <div class="mt-4">
@@ -154,26 +154,36 @@
         headers: myHeaders,
         redirect: 'follow'
     };
+    function getLogo(activity) {
+        if (activity == "soccer") {
+            return "https://aux.iconspalace.com/uploads/football-icon-256-1281892144.png"
+        }
+        else if (activity == "badminton") {
+            return "https://cdn-icons-png.flaticon.com/512/447/447840.png"
+        }
+    }
     function populateLobby() {
         fetch("/getAllFacilities", requestOptions)
             .then(response => response.json())
             .then(result => {
                 for (let i = 0; i < result['rooms'].length; i++) {
+                    var startDate = moment(result['rooms'][i]['filter'].startDate).format('MMM DD h:mm A')
+                    var endDate = moment(result['rooms'][i]['filter'].endDate).format('MMM DD h:mm A')
                     slots = calculateSlots(result['rooms'][i])
                     room += `<li class="col-span-1 bg-white divide-y divide-gray-200 rounded-lg shadow">
                         <div class="flex items-center justify-between w-full p-6 space-x-6">
                             <div class="flex-1 truncate">
-                                <div class="flex items-center space-x-3">
-                                    <h3 class="text-sm font-medium text-gray-900 truncate">`+ result['rooms'][i]['creator'].name + ` (` + slots + `/` + result['rooms'][i]['filter'].roomSize + `)</h3>
+                                <div class="flex flex-wrap items-center ">
+                                    <h3 class="pr-1 text-sm font-medium text-gray-900 truncate">`+ result['rooms'][i]['creator'].name + ` (` + slots + `/` + result['rooms'][i]['filter'].roomSize + `)</h3>
                                     <span class="flex-shrink-0 inline-block px-2 py-0.5 text-green-800 text-xs font-medium bg-green-100 rounded-full">`+ result['rooms'][i]['filter'].activity + `</span>
                                     <span class="flex-shrink-0 inline-block px-2 py-0.5 text-purple-800 text-xs font-medium bg-purple-100 rounded-full">Rating `+ result['rooms'][i]['creator'].mmr + `</span>
                                 </div>
                                 <span class="flex-shrink-0 inline-block px-2 py-0.5 text-red-800 text-xs font-medium bg-red-100 rounded-full">`+ result['rooms'][i]['filter'].locations + `</span>
-                                <p class="mt-1 text-sm text-gray-500 truncate">`+ result['rooms'][i]['filter'].startDate + `</p>
-                                <p class="mt-1 text-sm text-gray-500 truncate">`+ result['rooms'][i]['filter'].endDate + `</p>
+                                <p class="mt-1 text-sm text-gray-500 truncate">Starts on `+ startDate + `</p>
+                                <p class="mt-1 text-sm text-gray-500 truncate">Ends on `+ endDate + `</p>
                             </div>
                             <img class="flex-shrink-0 w-10 h-10 bg-gray-300 rounded-full"
-                                src="https://cdn-icons-png.flaticon.com/512/447/447840.png" alt="">
+                                src="`+ getLogo(result['rooms'][i]['filter']['activity']) + `" alt="">
                         </div>
                         <div>
                             <div class="flex -mt-px divide-x divide-gray-200">
