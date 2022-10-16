@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "theme_color": "#000000",
     "background_color": "#000000",
-    "start_url": "/",
+    "start_url": "/profile",
     "icons": [
         {
             "src": "images/icons/icon-72x72.png",

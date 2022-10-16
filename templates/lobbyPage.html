@@ -64,7 +64,7 @@
                         <h1 class="mt-2 text-2xl font-bold leading-7 text-white sm:text-3xl sm:truncate">Zainul Ariffin
                         </h1>
                         <div class="flex flex-wrap gap-3 pt-3 mt-1 sm:mt-0" id="badgeNav">
-                            
+
                         </div>
                     </div>
                     <div class="flex mt-5 xl:mt-0 xl:ml-4">
@@ -83,7 +83,8 @@
                                     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                                         aria-labelledby="dropdown-button">
                                         <li>
-                                            <button type="button" id="locationFilter" onclick="categoryClick('location')"
+                                            <button type="button" id="locationFilter"
+                                                onclick="categoryClick('location')"
                                                 class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">location</button>
                                         </li>
                                         <li>
@@ -143,7 +144,7 @@
                         </div>
                     </li>`;
 
-    filterQuery = {"activity":[],"locations":[]}
+    filterQuery = { "activity": [], "locations": [] }
 
     var myHeaders = new Headers();
     myHeaders.append("Cookie", "csrftoken=QR23xx5TxOqewhyR3DmwfFfj50EvtQ8CRjn1PhJ5Q7jEzngTqbGoaMbPO3A8Vk6f");
@@ -153,13 +154,13 @@
         headers: myHeaders,
         redirect: 'follow'
     };
-    function populateLobby(){
-        fetch("http://127.0.0.1:8080/getAllFacilities", requestOptions)
-        .then(response => response.json())
-        .then(result => {
-            for (let i = 0; i < result['rooms'].length; i++) {
-                slots = calculateSlots(result['rooms'][i])
-                room += `<li class="col-span-1 bg-white divide-y divide-gray-200 rounded-lg shadow">
+    function populateLobby() {
+        fetch("/getAllFacilities", requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                for (let i = 0; i < result['rooms'].length; i++) {
+                    slots = calculateSlots(result['rooms'][i])
+                    room += `<li class="col-span-1 bg-white divide-y divide-gray-200 rounded-lg shadow">
                         <div class="flex items-center justify-between w-full p-6 space-x-6">
                             <div class="flex-1 truncate">
                                 <div class="flex items-center space-x-3">
@@ -192,27 +193,27 @@
                             </div>
                         </div>
                     </li>`;
-            }
-            document.getElementById('lobbyrooms').innerHTML = room;
-        })
-        .catch(error => console.log('error', error));
+                }
+                document.getElementById('lobbyrooms').innerHTML = room;
+            })
+            .catch(error => console.log('error', error));
     }
-    
+
     populateLobby();
-    
+
     filter = [];
     filterLocation = [];
-    filterSports = ['soccer','tennis','table_tennis','badminton'];
-        
+    filterSports = ['soccer', 'tennis', 'table_tennis', 'badminton'];
+
     var myHeaders2 = new Headers();
     myHeaders2.append("Cookie", "csrftoken=QR23xx5TxOqewhyR3DmwfFfj50EvtQ8CRjn1PhJ5Q7jEzngTqbGoaMbPO3A8Vk6f");
 
     var requestOptions2 = {
-    method: 'GET',
-    headers: myHeaders2,
-    redirect: 'follow'
+        method: 'GET',
+        headers: myHeaders2,
+        redirect: 'follow'
     };
-    
+
     function autocomplete(inp) {
         /*the autocomplete function takes two arguments,
         the text field element and an filteray of possible autocompleted values:*/
@@ -309,27 +310,27 @@
             closeAllLists(e.target);
         });
         inp.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') {
-            insertFilter(document.getElementById("search-dropdown").value, document.getElementById('dropdown-button').innerHTML);
-        }
-    })
+            if (e.key === 'Enter') {
+                insertFilter(document.getElementById("search-dropdown").value, document.getElementById('dropdown-button').innerHTML);
+            }
+        })
     }
-    
 
-    fetch("http://127.0.0.1:8080/getAllLocation", requestOptions2)
-    .then(response => response.json())
-    .then(result => {
-        filter=result;
-        filterLocation = result
-        autocomplete(document.getElementById("search-dropdown"));
-    })
-    .catch(error => console.log('error', error));
 
-    function categoryClick(category){
-        if(category == 'location'){
+    fetch("/getAllLocation", requestOptions2)
+        .then(response => response.json())
+        .then(result => {
+            filter = result;
+            filterLocation = result
+            autocomplete(document.getElementById("search-dropdown"));
+        })
+        .catch(error => console.log('error', error));
+
+    function categoryClick(category) {
+        if (category == 'location') {
             filter = filterLocation
         }
-        else{
+        else {
             filter = filterSports
         }
         document.getElementById('dropdown-button').innerHTML = category
@@ -337,31 +338,31 @@
 
     // document.querySelector('#search-dropdown').addEventListener();
 
-    function calculateSlots(room){
+    function calculateSlots(room) {
         joined = room['joined'].length
         return 1 + joined
     }
 
-    function insertFilter(filterName, filterType){
+    function insertFilter(filterName, filterType) {
         console.log(filter)
-        if(filter.includes(filterName)){
+        if (filter.includes(filterName)) {
             // default indigo
             color = ''
-            if(filterType == "sport"){
+            if (filterType == "sport") {
                 filterQuery['activity'].push(filterName)
                 color = 'green'
-            }else if(filterType == "location"){
+            } else if (filterType == "location") {
                 filterQuery['locations'].push(filterName)
                 color = 'red'
             }
             filterLobby(filterQuery)
             currentHTML = document.getElementById('badgeNav').innerHTML
-            document.getElementById('badgeNav').innerHTML = currentHTML + 
-            `<span id="`+filterName+`" value="`+filterType+`"
-                class="inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-`+color+`-100 text-`+color+`-700">
-                `+filterName+`
-                <button type="button" onclick="removeBadge('`+filterName+`','`+filterType+`')"                   
-                    class="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-`+color+`-400 hover:bg-`+color+`-200 hover:text-`+color+`-500 focus:outline-none focus:bg-`+color+`-500 focus:text-white">
+            document.getElementById('badgeNav').innerHTML = currentHTML +
+                `<span id="` + filterName + `" value="` + filterType + `"
+                class="inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-`+ color + `-100 text-` + color + `-700">
+                `+ filterName + `
+                <button type="button" onclick="removeBadge('`+ filterName + `','` + filterType + `')"                   
+                    class="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-`+ color + `-400 hover:bg-` + color + `-200 hover:text-` + color + `-500 focus:outline-none focus:bg-` + color + `-500 focus:text-white">
                     <span class="sr-only">Remove large option</span>
                     <svg class="w-2 h-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
                         <path stroke-linecap="round" stroke-width="1.5" d="M1 1l6 6m0-6L1 7" />
@@ -369,19 +370,19 @@
                 </button>
             </span>`
         }
-        
+
     }
 
-    function removeBadge(filterName,filterType){
+    function removeBadge(filterName, filterType) {
         console.log(filterName)
         console.log(filterType)
         console.log(filterQuery)
-        if(filterType == "sport"){
+        if (filterType == "sport") {
             const index = filterQuery['activity'].indexOf(filterName);
             if (index > -1) { // only splice array when item is found
                 filterQuery['activity'].splice(index, 1); // 2nd parameter means remove one item only
             }
-        }else if(filterType == "location"){
+        } else if (filterType == "location") {
             const index = filterQuery['locations'].indexOf(filterName);
             if (index > -1) { // only splice array when item is found
                 filterQuery['locations'].splice(index, 1); // 2nd parameter means remove one item only
@@ -391,13 +392,13 @@
         document.getElementById(filterName).remove();
     }
 
-    function filterLobby(filterQuery){
+    function filterLobby(filterQuery) {
         console.log(filterQuery)
         query = structuredClone(filterQuery)
-        if(query['locations'].length == 0){
+        if (query['locations'].length == 0) {
             delete query['locations']
         }
-        if(query['activity'].length == 0){
+        if (query['activity'].length == 0) {
             delete query['activity']
         }
         var myHeaders = new Headers();
@@ -407,16 +408,16 @@
         var raw = JSON.stringify(query);
 
         var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
         };
 
-        fetch("http://127.0.0.1:8080/filterFacilities", requestOptions)
-        .then(response => response.json())
-        .then(result => {
-            room = `<li class="col-span-1 bg-white divide-y divide-gray-200 rounded-lg shadow">
+        fetch("/filterFacilities", requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                room = `<li class="col-span-1 bg-white divide-y divide-gray-200 rounded-lg shadow">
                         <div class="p-6 text-center">
                             <h3 class="text-sm font-medium text-gray-900">Make a booking</h3>
                             <p class="mt-1 text-sm text-gray-500">Play with friends or public</p>
@@ -435,9 +436,9 @@
                             </div>
                         </div>
                     </li>`;
-            for (let i = 0; i < result['rooms'].length; i++) {
-                slots = calculateSlots(result['rooms'][i])
-                room += `<li class="col-span-1 bg-white divide-y divide-gray-200 rounded-lg shadow">
+                for (let i = 0; i < result['rooms'].length; i++) {
+                    slots = calculateSlots(result['rooms'][i])
+                    room += `<li class="col-span-1 bg-white divide-y divide-gray-200 rounded-lg shadow">
                         <div class="flex items-center justify-between w-full p-6 space-x-6">
                             <div class="flex-1 truncate">
                                 <div class="flex items-center space-x-3">
@@ -470,11 +471,11 @@
                             </div>
                         </div>
                     </li>`;
-            }
-            document.getElementById('lobbyrooms').innerHTML = room;
-        })
-        .catch(error => console.log('error', error));
+                }
+                document.getElementById('lobbyrooms').innerHTML = room;
+            })
+            .catch(error => console.log('error', error));
     }
-    
+
 </script>
 {% endblock %}
