@@ -56,7 +56,7 @@
     }
 
     .autocomplete-active {
-        /*when navigating through the items using the arrow keys:*/
+        /*when navigating through the items using the filterow keys:*/
         background-color: DodgerBlue !important;
         color: #ffffff;
     }
@@ -74,52 +74,7 @@
                         <h1 id="MMR" class="mt-2 text-2xl font-bold leading-7 text-white sm:text-3xl sm:truncate">
                             Rating: 1883
                         </h1>
-                        <div class="flex flex-wrap gap-3 pt-3 mt-1 sm:mt-0">
-                            <span
-                                class="inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-indigo-100 text-indigo-700">
-                                Fuchun Secondary School
-                                <button type="button"
-                                    class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 text-indigo-400 rounded-full gap-x-1 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white">
-                                    <span class="sr-only">Remove large option</span>
-                                    <svg class="w-2 h-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
-                                        <path stroke-linecap="round" stroke-width="1.5" d="M1 1l6 6m0-6L1 7" />
-                                    </svg>
-                                </button>
-                            </span>
-                            <span
-                                class="inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-indigo-100 text-indigo-700">
-                                Large
-                                <button type="button"
-                                    class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 text-indigo-400 rounded-full gap-x-1 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white">
-                                    <span class="sr-only">Remove large option</span>
-                                    <svg class="w-2 h-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
-                                        <path stroke-linecap="round" stroke-width="1.5" d="M1 1l6 6m0-6L1 7" />
-                                    </svg>
-                                </button>
-                            </span>
-                            <span
-                                class="inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-indigo-100 text-indigo-700">
-                                Large
-                                <button type="button"
-                                    class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 text-indigo-400 rounded-full gap-x-1 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white">
-                                    <span class="sr-only">Remove large option</span>
-                                    <svg class="w-2 h-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
-                                        <path stroke-linecap="round" stroke-width="1.5" d="M1 1l6 6m0-6L1 7" />
-                                    </svg>
-                                </button>
-                            </span>
-                            <span
-                                class="inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-indigo-100 text-indigo-700">
-                                Large
-                                <button type="button"
-                                    class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 text-indigo-400 rounded-full gap-x-1 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white">
-                                    <span class="sr-only">Remove large option</span>
-                                    <svg class="w-2 h-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
-                                        <path stroke-linecap="round" stroke-width="1.5" d="M1 1l6 6m0-6L1 7" />
-                                    </svg>
-                                </button>
-                            </span>
-                        </div>
+                        <div class="flex flex-wrap gap-3 pt-3 mt-1 sm:mt-0" id="badgeNav"></div>
                     </div>
                     <div class="flex mt-5 xl:mt-0 xl:ml-4">
                         <form>
@@ -129,12 +84,7 @@
                                     Email</label>
                                 <button id="dropdown-button" data-dropdown-toggle="dropdown"
                                     class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
-                                    type="button">All categories <svg aria-hidden="true" class="w-4 h-4 ml-1"
-                                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                            clip-rule="evenodd"></path>
-                                    </svg></button>
+                                    type="button">location</button>
                                 <div id="dropdown"
                                     class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700"
                                     data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top"
@@ -142,24 +92,12 @@
                                     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                                         aria-labelledby="dropdown-button">
                                         <li>
-                                            <button type="button"
-                                                class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Age</button>
+                                            <button type="button" onclick="categoryClick('location')"
+                                                class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">location</button>
                                         </li>
                                         <li>
-                                            <button type="button"
-                                                class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Gender</button>
-                                        </li>
-                                        <li>
-                                            <button type="button"
-                                                class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Activity</button>
-                                        </li>
-                                        <li>
-                                            <button type="button"
-                                                class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Location</button>
-                                        </li>
-                                        <li>
-                                            <button type="button"
-                                                class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Duration</button>
+                                            <button type="button" onclick="categoryClick('sport')"
+                                                class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">sport</button>
                                         </li>
                                     </ul>
                                 </div>
@@ -204,13 +142,13 @@
                             <img class="mt-6 w-32 h-32 flex-shrink-0 mx-auto rounded-full"
                                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
                                 alt="">
-                            <h3 class="mt-6 text-gray-900 text-sm font-medium">Jane Cooper (2930)</h3>
+                            <h3 class="mt-6 text-gray-900 text-sm font-medium">Jane Cooper (1394)</h3>
                             <dl class="mt-1 flex-grow flex flex-col justify-between">
-                                <dd class="text-gray-500 text-sm">Fuchun CC</dd>
+                                <dd class="text-gray-500 text-sm">Woodlands Sports Hall</dd>
                                 <dd class="mt-1 text-gray-500 text-sm">15/10/2022, 3:00PM to 5:00PM</dd>
                                 <dd class="mt-3">
                                     <span
-                                        class="px-2 py-1 text-green-800 text-xs font-medium bg-green-100 rounded-full">Male</span>
+                                        class="px-2 py-1 text-green-800 text-xs font-medium bg-green-100 rounded-full">Female</span>
                                     <span
                                         class="px-2 py-1 text-green-800 text-xs font-medium bg-green-100 rounded-full">20</span>
                                     <span
@@ -374,11 +312,15 @@
         qc.style.display = 'none';
     }
 
+    var filter = []
+    var filterLocation = ['Gongshang Primary School Hall','Greendale Primary School Hall','North Vista Primary School Hall','Concord Primary School Hall','Bedok Green Primary School Hall','Peiying Primary School Hall','Bishan Clubhouse','Pasir Ris Crest Secondary School Hall', 'Clementi Sports Hall','Woodlands Sports Hall','Pasir Ris Sports Hall','Heartbeat @ Bedok Table Tennis Area','Pasir Ris 5 a side Soccer (Artificial Field)','Beatty Secondary School Field','Sengkang Secondary School Field','Regent Secondary School','Burghley Tennis Centre','Choa Chu Kang Tennis Centre','Bishan Club House','Yio Chu Kang Tennis Centre']
+    var filterSports = ['Badminton','Soccer','Table Tennis','Tennis']
 
-    var countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua &amp; Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia &amp; Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central Arfrican Republic", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica", "Cote D Ivoire", "Croatia", "Cuba", "Curacao", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "French West Indies", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauro", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Pierre &amp; Miquelon", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "St Kitts &amp; Nevis", "St Lucia", "St Vincent", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor L'Este", "Togo", "Tonga", "Trinidad &amp; Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks &amp; Caicos", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe"];
-    function autocomplete(inp, arr) {
+    filter = filterLocation
+    // var countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua &amp; Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia &amp; Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central Arfrican Republic", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica", "Cote D Ivoire", "Croatia", "Cuba", "Curacao", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "French West Indies", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauro", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Pierre &amp; Miquelon", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "St Kitts &amp; Nevis", "St Lucia", "St Vincent", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor L'Este", "Togo", "Tonga", "Trinidad &amp; Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks &amp; Caicos", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe"];
+    function autocomplete(inp) {
         /*the autocomplete function takes two arguments,
-        the text field element and an array of possible autocompleted values:*/
+        the text field element and an filteray of possible autocompleted values:*/  
         var currentFocus;
         /*execute a function when someone writes in the text field:*/
         inp.addEventListener("input", function (e) {
@@ -393,17 +335,17 @@
             a.setAttribute("class", "autocomplete-items absolute max-h-72 overflow-auto");
             /*append the DIV element as a child of the autocomplete container:*/
             this.parentNode.appendChild(a);
-            /*for each item in the array...*/
-            for (i = 0; i < arr.length; i++) {
+            /*for each item in the filteray...*/
+            for (i = 0; i < filter.length; i++) {
                 /*check if the item starts with the same letters as the text field value:*/
-                if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                if (filter[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
                     /*create a DIV element for each matching element:*/
                     b = document.createElement("DIV");
                     /*make the matching letters bold:*/
-                    b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-                    b.innerHTML += arr[i].substr(val.length);
-                    /*insert a input field that will hold the current array item's value:*/
-                    b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                    b.innerHTML = "<strong>" + filter[i].substr(0, val.length) + "</strong>";
+                    b.innerHTML += filter[i].substr(val.length);
+                    /*insert a input field that will hold the current filteray item's value:*/
+                    b.innerHTML += "<input type='hidden' value='" + filter[i] + "'>";
                     /*execute a function when someone clicks on the item value (DIV element):*/
                     b.addEventListener("click", function (e) {
                         /*insert the value for the autocomplete text field:*/
@@ -421,13 +363,13 @@
             var x = document.getElementById(this.id + "autocomplete-list");
             if (x) x = x.getElementsByTagName("div");
             if (e.keyCode == 40) {
-                /*If the arrow DOWN key is pressed,
+                /*If the filterow DOWN key is pressed,
                 increase the currentFocus variable:*/
                 currentFocus++;
                 /*and and make the current item more visible:*/
                 addActive(x);
             } else if (e.keyCode == 38) { //up
-                /*If the arrow UP key is pressed,
+                /*If the filterow UP key is pressed,
                 decrease the currentFocus variable:*/
                 currentFocus--;
                 /*and and make the current item more visible:*/
@@ -471,7 +413,58 @@
         document.addEventListener("click", function (e) {
             closeAllLists(e.target);
         });
+
+        inp.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                insertFilter(document.getElementById("search-dropdown").value, document.getElementById('dropdown-button').innerHTML);
+            }
+        })
     }
-    autocomplete(document.getElementById("search-dropdown"), countries);
+    autocomplete(document.getElementById("search-dropdown"));
+
+    function insertFilter(filterName, filterType){
+        console.log(filter)
+        if(filter.includes(filterName)){
+            // default indigo
+            color = ''
+            if(filterType == "sport"){
+                color = 'green'
+            }else if(filterType == "location"){
+                color = 'red'
+            }
+            currentHTML = document.getElementById('badgeNav').innerHTML
+            document.getElementById('badgeNav').innerHTML = currentHTML + 
+            `<span id="`+filterName+`" value="`+filterType+`"
+                class="inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-`+color+`-100 text-`+color+`-700">
+                `+filterName+`
+                <button type="button" onclick="removeBadge('`+filterName+`','`+filterType+`')"                   
+                    class="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-`+color+`-400 hover:bg-`+color+`-200 hover:text-`+color+`-500 focus:outline-none focus:bg-`+color+`-500 focus:text-white">
+                    <span class="sr-only">Remove large option</span>
+                    <svg class="w-2 h-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
+                        <path stroke-linecap="round" stroke-width="1.5" d="M1 1l6 6m0-6L1 7" />
+                    </svg>
+                </button>
+            </span>`
+        }
+        
+    }
+
+    function removeBadge(filterName,filterType){
+        console.log(filterName)
+        console.log(filterType)
+
+        document.getElementById(filterName).remove();
+    }
+
+    function categoryClick(category){
+        if(category == 'location'){
+            filter = filterLocation
+        }
+        else{
+            filter = filterSports
+        }
+        document.getElementById('dropdown-button').innerHTML = category
+    }
+
 </script>
 {% endblock %}
