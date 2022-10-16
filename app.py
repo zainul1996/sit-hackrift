@@ -381,4 +381,4 @@ def get_my_rooms():
 
 if __name__ == '__main__':
 	# ZAINUL: 192.168.1.4
-    app.run(debug=True, port=8080)
+    app.run(debug=True, port=8080, host="192.168.1.4")
