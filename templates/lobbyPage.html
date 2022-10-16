@@ -321,6 +321,7 @@
         .then(response => response.json())
         .then(result => {
             filter = result;
+            filterLocation = result
             autocomplete(document.getElementById("search-dropdown"));
         })
         .catch(error => console.log('error', error));
@@ -343,20 +344,25 @@
     }
 
     function insertFilter(filterName, filterType) {
+        console.log(filter)
         if (filter.includes(filterName)) {
+            // default indigo
+            color = ''
             if (filterType == "sport") {
                 filterQuery['activity'].push(filterName)
+                color = 'green'
             } else if (filterType == "location") {
                 filterQuery['locations'].push(filterName)
+                color = 'red'
             }
             filterLobby(filterQuery)
             currentHTML = document.getElementById('badgeNav').innerHTML
             document.getElementById('badgeNav').innerHTML = currentHTML +
                 `<span id="` + filterName + `" value="` + filterType + `"
-                class="inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-indigo-100 text-indigo-700">
+                class="inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-`+ color + `-100 text-` + color + `-700">
                 `+ filterName + `
                 <button type="button" onclick="removeBadge('`+ filterName + `','` + filterType + `')"                   
-                    class="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white">
+                    class="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-`+ color + `-400 hover:bg-` + color + `-200 hover:text-` + color + `-500 focus:outline-none focus:bg-` + color + `-500 focus:text-white">
                     <span class="sr-only">Remove large option</span>
                     <svg class="w-2 h-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
                         <path stroke-linecap="round" stroke-width="1.5" d="M1 1l6 6m0-6L1 7" />

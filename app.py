@@ -363,6 +363,22 @@ def get_all_location():
 	print(mylist)
 	return(json.loads(json.dumps(mylist, default=str)))
 
+@app.route('/getMyRoom',methods=['POST'])
+def get_my_rooms():
+	content = request.json
+	if 'userid' in content:
+		print(content['userid'])
+		res = db['room'].find(
+			{
+				"roomStatus": 1,
+				"creator._id": ObjectId(content['userid'])
+			}
+		)
+		result = {"rooms": list(res)}
+		return(json.loads(json.dumps(result, default=str)))
+	else:
+		return("Failed, no userid")
+
 if __name__ == '__main__':
 	# ZAINUL: 192.168.1.4
-    app.run(debug=True, port=8080, host='192.168.1.4')
+    app.run(debug=True, port=8080)
