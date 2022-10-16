@@ -71,9 +71,9 @@
                     <div class="flex-1 min-w-0">
                         <h1 class="mt-2 text-2xl font-bold leading-7 text-white sm:text-3xl sm:truncate">Zainul Ariffin
                         </h1>
-                        <h1 id="MMR" class="mt-2 text-2xl font-bold leading-7 text-white sm:text-3xl sm:truncate">
+                        <!-- <h1 id="MMR" class="mt-2 text-2xl font-bold leading-7 text-white sm:text-3xl sm:truncate">
                             Rating: 1883
-                        </h1>
+                        </h1> -->
                         <div class="flex flex-wrap gap-3 pt-3 mt-1 sm:mt-0" id="badgeNav"></div>
                     </div>
                     <div class="flex mt-5 xl:mt-0 xl:ml-4">
@@ -130,36 +130,36 @@
         </div>
 
 
-        <div class="text-center align-middle pt-20">
+        <div class="pt-20 text-center align-middle">
             <div class="content-center px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="h-full max-w-xs mx-auto text-center align-middle">
 
                     <!-- Game found -->
                     <div id="match-card" style="display: none"
-                        class="col-span-1 flex flex-col text-center bg-white rounded-lg shadow divide-y divide-gray-200">
-                        <div class="flex-1 flex flex-col p-8">
-                            <h3 class="text-gray-900 text-sm font-medium">Upcoming match</h3>
-                            <img class="mt-6 w-32 h-32 flex-shrink-0 mx-auto rounded-full"
+                        class="flex flex-col col-span-1 text-center bg-white divide-y divide-gray-200 rounded-lg shadow">
+                        <div class="flex flex-col flex-1 p-8">
+                            <h3 class="text-sm font-medium text-gray-900">Upcoming match</h3>
+                            <img class="flex-shrink-0 w-32 h-32 mx-auto mt-6 rounded-full"
                                 src="../static/images/opponent-picture-min.avif" alt="">
-                            <h3 class="mt-6 text-gray-900 text-sm font-medium">Jane Cooper (1394)</h3>
-                            <dl class="mt-1 flex-grow flex flex-col justify-between">
-                                <dd class="text-gray-500 text-sm">Woodlands Sports Hall</dd>
-                                <dd class="mt-1 text-gray-500 text-sm">17/10/2022, 3:00PM to 5:00PM</dd>
+                            <h3 class="mt-6 text-sm font-medium text-gray-900">Jane Cooper (1394)</h3>
+                            <dl class="flex flex-col justify-between flex-grow mt-1">
+                                <dd class="text-sm text-gray-500">Woodlands Sports Hall</dd>
+                                <dd class="mt-1 text-sm text-gray-500">17/10/2022, 3:00PM to 5:00PM</dd>
                                 <dd class="mt-3">
                                     <span
-                                        class="px-2 py-1 text-green-800 text-xs font-medium bg-green-100 rounded-full">Female</span>
+                                        class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">Female</span>
                                     <span
-                                        class="px-2 py-1 text-green-800 text-xs font-medium bg-green-100 rounded-full">20</span>
+                                        class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">20</span>
                                     <span
-                                        class="px-2 py-1 text-green-800 text-xs font-medium bg-green-100 rounded-full">Badminton</span>
+                                        class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">Badminton</span>
                                 </dd>
                             </dl>
                         </div>
                         <div>
-                            <div class="-mt-px flex divide-x divide-gray-200">
-                                <div class="w-0 flex-1 flex">
+                            <div class="flex -mt-px divide-x divide-gray-200">
+                                <div class="flex flex-1 w-0">
                                     <a id="cancel-btn"
-                                        class="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
+                                        class="relative inline-flex items-center justify-center flex-1 w-0 py-4 -mr-px text-sm font-medium text-gray-700 border border-transparent rounded-bl-lg hover:text-gray-500">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                             class="w-5 h-5 text-gray-400">
                                             <path fill-rule="evenodd"
@@ -169,9 +169,9 @@
                                         <span class="ml-3">Cancel</span>
                                     </a>
                                 </div>
-                                <div class="-ml-px w-0 flex-1 flex">
+                                <div class="flex flex-1 w-0 -ml-px">
                                     <a id="attendance-btn"
-                                        class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
+                                        class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-medium text-gray-700 border border-transparent rounded-br-lg hover:text-gray-500">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                             class="w-5 h-5 text-gray-400">
                                             <path fill-rule="evenodd"
@@ -186,12 +186,12 @@
                     </div>
 
                     <!-- This example requires Tailwind CSS v2.0+ -->
-                    <div id="qrcode-card" class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200"
+                    <div id="qrcode-card" class="overflow-hidden bg-white divide-y divide-gray-200 rounded-lg shadow"
                         style="display: none;">
-                        <div class="mx-auto px-4 py-5 sm:p-6 qrcode-container">
+                        <div class="px-4 py-5 mx-auto sm:p-6 qrcode-container">
                             <div class="mb-5" style="float:left;">
                                 <button id="back-btn" type="button"
-                                    class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Back</button>
+                                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Back</button>
                             </div>
                             <div id="qrcode" class="mx-auto"></div>
                         </div>
@@ -210,21 +210,21 @@
 <script>
 
     // On log in
-    var profile;
-    const getInfo = async () => {
-        const response = await fetch('/user?' + new URLSearchParams({
-            id: "6349c0439218286ad81f6575",
-        }), {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            method: "GET"
-        })
-        profile = await response.json();
-        console.log(profile)
-        document.getElementById('MMR').innerHTML = "Rating: " + profile.mmr;
-    }
-    getInfo();
+    // var profile;
+    // const getInfo = async () => {
+    //     const response = await fetch('/user?' + new URLSearchParams({
+    //         id: "6349c0439218286ad81f6575",
+    //     }), {
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         method: "GET"
+    //     })
+    //     profile = await response.json();
+    //     console.log(profile)
+    //     document.getElementById('MMR').innerHTML = "Rating: " + profile.mmr;
+    // }
+    // getInfo();
 
     // Matchmake
     var dummy_application = {
