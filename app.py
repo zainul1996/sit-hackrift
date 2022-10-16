@@ -383,6 +383,19 @@ def get_my_rooms():
 	else:
 		return("Failed, no userid")
 
+@app.route('/getSpecificRoom',methods=['POST'])
+def get_a_room():
+	content = request.json
+	if 'roomid' in content:
+		print(content['roomid'])
+		res = db['room'].find(
+			{
+				'_id': ObjectId(content['roomid'])
+			}
+		)
+		result = {"rooms": list(res)}
+		return(json.loads(json.dumps(result, default=str)))
+
 if __name__ == '__main__':
 	# ZAINUL: 192.168.1.4/172.20.10.3
 	# KOK FONG: 192.168.68.114
