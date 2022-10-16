@@ -191,7 +191,7 @@
                         </div>
                         <div>
                             <div class="flex -mt-px divide-x divide-gray-200">
-                                <div class="flex flex-1 w-0">
+                                <div class="flex flex-1 w-0" onclick="joinroom('`+result['rooms'][i]['_id']+`')">
                                     <a href="#"
                                         class="relative inline-flex items-center justify-center flex-1 w-0 py-4 -mr-px text-sm font-medium text-gray-700 border border-transparent rounded-bl-lg hover:text-gray-500">
                                         <!-- Heroicon name: solid/mail -->
@@ -350,7 +350,40 @@
         document.getElementById('dropdown-button').innerHTML = category
     }
 
-    // document.querySelector('#search-dropdown').addEventListener();
+    function joinroom(roomid){
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Cookie", "csrftoken=QR23xx5TxOqewhyR3DmwfFfj50EvtQ8CRjn1PhJ5Q7jEzngTqbGoaMbPO3A8Vk6f");
+
+        var raw = JSON.stringify({
+        "userID": "6349c0439218286ad81f6575",
+        "roomID": roomid
+        });
+
+        var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+        };
+
+        fetch("http://127.0.0.1:8080/joinroom", requestOptions)
+        .then(response => response.text())
+        .then(result => {
+            console.log(result.substring(0, 6))
+            if(result.substring(0,6)=="Failed"){
+                alert(result)
+            }
+            else{
+                alert(result);
+                //refresh page
+                location.reload()
+            }
+            
+            
+        })
+        .catch(error => alert(error));
+    }
 
     function calculateSlots(room) {
         joined = room['joined'].length

@@ -130,7 +130,7 @@
         </div>
 
 
-        <div class="pt-20 text-center align-middle">
+        <div class="text-center align-middle pt-32">
             <div class="content-center px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="h-full max-w-xs mx-auto text-center align-middle">
 
@@ -431,8 +431,12 @@
             color = ''
             if (filterType == "sport") {
                 color = 'green'
+                filterSports = filterSports.filter(e => e !== filterName)
+                filter = filterSports
             } else if (filterType == "location") {
                 color = 'red'
+                filterLocation = filterLocation.filter(e => e !== filterName)
+                filter = filterLocation
             }
             currentHTML = document.getElementById('badgeNav').innerHTML
             document.getElementById('badgeNav').innerHTML = currentHTML +
@@ -447,13 +451,21 @@
                     </svg>
                 </button>
             </span>`
+            document.getElementById('search-dropdown').value = ""
         }
-
     }
 
     function removeBadge(filterName, filterType) {
         console.log(filterName)
         console.log(filterType)
+
+        if (filterType == "sport") {
+            filterSports.push(filterName)
+            filter = filterSports
+        } else if (filterType == "location") {
+            filterLocation.push(filterName)
+            filter = filterLocation
+        }
 
         document.getElementById(filterName).remove();
     }
