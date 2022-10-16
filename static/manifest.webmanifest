@@ -1,12 +1,12 @@
 {
-    "name": "Flask-PWA",
-    "short_name": "Flask-PWA",
+    "name": "Sportify",
+    "short_name": "Sporify",
     "description": "A progressive webapp template built with Flask",
     "display": "standalone",
     "orientation": "portrait",
     "theme_color": "#000000",
     "background_color": "#000000",
-    "start_url": "/login",
+    "start_url": "/index",
     "icons": [
         {
             "src": "images/icons/icon-72x72.png",

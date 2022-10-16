@@ -2,7 +2,6 @@
 {% block body %}
 <div class="min-h-screen bg-gray-700">
     <div class="flex flex-col min-h-screen bg-gray-700">
-        <!-- Page heading -->
         <div class="bg-gray-800 ">
             <header class="py-8 md:mt-16">
                 <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 xl:flex xl:items-center xl:justify-between">
@@ -15,8 +14,7 @@
         </div>
 
         <div class="flex flex-col">
-            <div class="grid px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <!-- title -->
+            <div class="grid px-4 pb-24 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <p class="px-4 pt-6 text-2xl font-medium text-gray-200 sm:px-6 lg:px-8">My Bookings</p>
                 <div id="matchmake-section" class="flex flex-grow" style="display: block">
 
@@ -26,7 +24,75 @@
         </div>
     </div>
 </div>
+<div class="relative z-10 hidden" id="modal-div" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 hidden transition-opacity bg-gray-500 bg-opacity-75" id="modal-backdrop"></div>
+    <div class="fixed inset-0 z-10 overflow-y-auto">
+        <div class="flex items-end justify-center min-h-full p-4 text-center sm:items-center sm:p-0">
+            <div id="modal"
+                class="relative hidden overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:w-full sm:max-w-lg">
+                <div class="px-4 pt-5 pb-4 bg-white sm:p-6 sm:pb-4">
+                    <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+                        <div class="px-4 py-5 sm:px-6">
+                            <h3 class="text-lg font-medium leading-6 text-gray-900">Room Details</h3>
+                            <p class="max-w-2xl mt-1 text-sm text-gray-500">Personal details and application.</p>
+                        </div>
+                        <div class="px-4 py-5 border-t border-gray-200 sm:px-6">
+                            <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+                                <div class="sm:col-span-1">
+                                    <dt class="text-sm font-medium text-gray-500">Full name</dt>
+                                    <dd class="mt-1 text-sm text-gray-900">Margot Foster</dd>
+                                </div>
+                                <div class="sm:col-span-1">
+                                    <dt class="text-sm font-medium text-gray-500">Application for</dt>
+                                    <dd class="mt-1 text-sm text-gray-900">Backend Developer</dd>
+                                </div>
+                                <div class="sm:col-span-1">
+                                    <dt class="text-sm font-medium text-gray-500">Email address</dt>
+                                    <dd class="mt-1 text-sm text-gray-900">margotfoster@example.com</dd>
+                                </div>
+                                <div class="sm:col-span-1">
+                                    <dt class="text-sm font-medium text-gray-500">Salary expectation</dt>
+                                    <dd class="mt-1 text-sm text-gray-900">$120,000</dd>
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <dt class="text-sm font-medium text-gray-500">About</dt>
+                                    <dd class="mt-1 text-sm text-gray-900">Fugiat ipsum ipsum deserunt culpa aute sint
+                                        do nostrud anim
+                                        incididunt cillum culpa consequat. Excepteur qui ipsum aliquip consequat sint.
+                                        Sit id mollit nulla
+                                        mollit nostrud in ea officia proident. Irure nostrud pariatur mollit ad
+                                        adipisicing reprehenderit
+                                        deserunt qui eu.</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-4 py-3 bg-gray-50 sm:flex sm:flex-row-reverse sm:px-6">
+                    <button type="button" id="close-modal"
+                        class="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
+    // close-modal on click
+    document.getElementById("close-modal").addEventListener("click", function () {
+        document.getElementById("modal").classList.add("hidden");
+        document.getElementById("modal-backdrop").classList.add("hidden");
+        // modal-div
+        document.getElementById("modal-div").classList.add("hidden");
+    });
+    function openModal() {
+        document.getElementById("modal").classList.remove("hidden");
+        document.getElementById("modal-backdrop").classList.remove("hidden");
+        // modal-div
+        document.getElementById("modal-div").classList.remove("hidden");
+    }
+
+
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Cookie", "csrftoken=QR23xx5TxOqewhyR3DmwfFfj50EvtQ8CRjn1PhJ5Q7jEzngTqbGoaMbPO3A8Vk6f");
@@ -99,7 +165,7 @@
                         <div>
                             <div class="flex -mt-px divide-x divide-gray-200">
                                 <div class="flex flex-1 w-0">
-                                    <a href="#"
+                                    <a href="#" onclick="openModal()"
                                         class="relative inline-flex items-center justify-center flex-1 w-0 py-4 -mr-px text-sm font-medium text-gray-700 border border-transparent rounded-bl-lg hover:text-gray-500">
                                         <!-- Heroicon name: solid/mail -->
                                         <svg class="w-5 h-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
